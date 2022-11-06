@@ -3,6 +3,7 @@ import * as Stumgmt from "stumgmtbackend"
 import * as Auth from "sparkyservice";
 import { ErrorInterface } from "../interface/ErrorInterface";
 import { CredentialsDto, AuthenticationInfoDto } from "sparkyservice";
+import { convertCompilerOptionsFromJson } from "typescript";
 
 
 
@@ -15,7 +16,8 @@ export default class SparkyAuthentifikation {
     constructor() {
 
         this.config = new Auth.Configuration();
-        this.config.basePath="http://localhost:51479";
+        this.config.basePath= process.env.REACT_APP_AUTHURL;
+
         
         
     }
