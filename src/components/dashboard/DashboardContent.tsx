@@ -12,8 +12,6 @@ export default class DashboardContent extends React.Component<React.PropsWithChi
     }
 
 
-
-
     render(): React.ReactNode {
         return (
             <div className="dashboard-content">

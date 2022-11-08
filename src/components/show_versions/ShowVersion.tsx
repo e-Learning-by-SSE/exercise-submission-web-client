@@ -11,16 +11,16 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
         render(): React.ReactNode {
             return (
                 <div className="show-version">
-                    Version1
-                    Version2 
-                    Version3 
-                    Version4 
-                    Version5 
-                    Version6 
-                    Version7 
-                    Version8 
-                    Version9 
-                    Version10 
+                    Version1 <p/>
+                    Version2 <p/>
+                    Version3 <p/>
+                    Version4 <p/>
+                    Version5 <p/>
+                    Version6 <p/>
+                    Version7 <p/>
+                    Version8 <p/>
+                    Version9 <p/>
+                    Version10 <p/>
                 </div>
             );
         }
