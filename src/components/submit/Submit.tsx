@@ -7,31 +7,31 @@ export default class Submit extends React.Component {
 
   
 
-    fileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    fileChange = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
-        console.log(event.target.files);
+        let filelist = event.dataTransfer.files;
+        for(let i = 0; i < filelist.length; i++){
+            console.log(filelist[i]);
+        }
+
+    }
+
+    allowDrop = (event: React.DragEvent<HTMLDivElement>) => {
+        event.preventDefault();
     }
 
     
     /*upload data button with drag and drop field*/
     render(): React.ReactNode {
         return (
-            <Segment placeholder>
-                <Header icon>
-                <Icon name='file code outline' />
-                No documents are listed for this customer.
-                </Header>
-                <Form>
-                    <Form.Button primary htmlFor="fileInput" type="submit" className="upload-file">Add Document</Form.Button>
-                    <input
-                    type="file"
-                    id="fileInput"
-                    name="file-input"
-                    onChange={this.fileChange}
-                    />
-                </Form>
-
-            </Segment>
+            <div onDrop={this.fileChange} onDragOver={this.allowDrop}>
+                <Segment placeholder>
+                    <Header icon>
+                    <Icon name='file code outline' />
+                    No documents are listed for this customer.
+                    </Header>
+                </Segment>
+            </div>
 
         );
     }
