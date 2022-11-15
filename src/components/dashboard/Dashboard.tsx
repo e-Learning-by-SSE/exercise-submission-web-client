@@ -3,11 +3,22 @@ import { Sidebar } from "semantic-ui-react";
 import Header from "./Header";
 import SidebarComponent from "./Sidebar";
 import "./dashboard.css";
+import { BrowserRouter } from "react-router-dom";
 
-export default class Dashboard extends Component {
+export default class Dashboard extends Component<React.PropsWithChildren<{menuSelected: any}>, {menuSelected: any}> {
+
+  constructor(props: React.PropsWithChildren<{menuSelected: any}>) {
+    super(props);
+    this.state = {menuSelected: props.menuSelected};
+  }
+
+
   render() {
      /* returns a Dashboard in semantic ui with sidebar and a header with login and account */
-    return <div className = "dashboard">  <Header /> <SidebarComponent/> </div>;
+
+    return (
+      <div className = "dashboard">  <Header /> <SidebarComponent menuSelected={this.props.menuSelected} /> </div>
+      );
 
   }
 }

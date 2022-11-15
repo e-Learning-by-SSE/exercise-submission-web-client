@@ -2,30 +2,21 @@
 
 import React, { Component } from "react";
 import { Menu, Icon, Sidebar, Segment } from "semantic-ui-react";
-import Submit from "../submit/Submit";
 import { Link } from "react-router-dom";
 import DashboardContent from "./DashboardContent";
-import ShowVersion from "../show_versions/ShowVersion";
+import DashboardStateHandler from "./DashboardStateHandler";
 
-export default class SidebarComponent extends Component<React.PropsWithChildren<{}>, {menuSelected: JSX.Element }> {
+export default class SidebarComponent extends Component<React.PropsWithChildren<{menuSelected: JSX.Element}>, {menuSelected: JSX.Element}> {
 
-  constructor(props: React.PropsWithChildren<{}>) {
+  constructor(props: React.PropsWithChildren<{menuSelected: JSX.Element}>) {
     super(props);
-    this.state = { menuSelected: <Submit/>};
+    this.state = { menuSelected: props.menuSelected };
+  
 
   }
 
-
-  onClickSubmit = () => {
-    this.setState({menuSelected: <Submit/>});
-  };
-
-  onClickVersion= () => {
-    this.setState({menuSelected: <ShowVersion/>});
-  };
-
-
     render() {
+      
         return (
             <Sidebar.Pushable as={Segment}>
             <Sidebar
@@ -37,27 +28,28 @@ export default class SidebarComponent extends Component<React.PropsWithChildren<
               visible
               width='thin'
             >
-              <Menu.Item as='a' onClick={this.onClickSubmit}>
-                <Icon name='upload' />
-                Submit
+              
+              <Menu.Item as={Link} to="/submit" name='submit'>
+                  <Icon name='upload' />
+                  Submit
               </Menu.Item>
-              <Menu.Item as='a' onClick={this.onClickVersion}>
-                <Icon name='gamepad' />
+              <Menu.Item as={Link} to="/version" name='version'>
+                <Icon name='file alternate' />
                 Version-History
               </Menu.Item>
               <Menu.Item as='a'>
                 <Icon name='camera' />
-                Channels
+                Download
               </Menu.Item>
             </Sidebar>
   
             <Sidebar.Pusher>
               <Segment basic>
-                
-                <DashboardContent>
-                    {this.state.menuSelected}
-                </DashboardContent>
-                
+                <DashboardStateHandler>
+                  <DashboardContent>
+                      {this.props.menuSelected}
+                  </DashboardContent>
+                </DashboardStateHandler>
                
               </Segment>
             </Sidebar.Pusher>
@@ -65,3 +57,5 @@ export default class SidebarComponent extends Component<React.PropsWithChildren<
         );
     }
     }
+
+   
