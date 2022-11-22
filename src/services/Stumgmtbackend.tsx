@@ -1,6 +1,6 @@
 import React from "react";
 import * as Stumgmt from "stumgmtbackend";
-import { AssignmentApi, CourseApi } from "stumgmtbackend";
+import { AssignmentApi, AssignmentDto, AuthenticationApi, CourseApi } from "stumgmtbackend";
 
 
 export default class Stumgmtbackend {
@@ -20,18 +20,16 @@ export default class Stumgmtbackend {
 
     }
     
-    public async getAssigments() {
+    public async getAssigments(): Promise<Stumgmt.AssignmentDto[]> {
         let api = new AssignmentApi(this.config);
         let response = await api.getAssignmentsOfCourse("java-wise2021");
+        return response.data
+    }
 
-        response.data.forEach((assignment) => {
-
-            console.log(assignment.name);
-
-
-        });
-
-
+    public async getCurrentUser(): Promise<Stumgmt.UserDto> {
+        let api = new AuthenticationApi(this.config);
+        let response = await api.whoAmI();
+        return response.data;
     }
 
 

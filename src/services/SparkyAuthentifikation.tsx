@@ -15,8 +15,7 @@ export default class SparkyAuthentifikation {
 
     constructor() {
 
-        this.config = new Auth.Configuration();
-        this.config.basePath= process.env.REACT_APP_AUTHURL;
+        this.config = SparkyAuthentifikation.getConfig();
 
         
         
@@ -46,5 +45,17 @@ export default class SparkyAuthentifikation {
         }
 
         return returnInterface;
+    }
+
+    private static getConfig(): Auth.Configuration {
+        let authConfig = new Auth.Configuration();
+        authConfig.basePath= process.env.REACT_APP_AUTHURL;
+        return authConfig;
+    }
+
+    public static async checkToken(token: string): Promise<boolean> {
+        let auth = new Auth.AuthControllerApi(SparkyAuthentifikation.getConfig());
+        let response = await auth.checkTokenAuthenticationStatus();
+        return true;
     }
 }
