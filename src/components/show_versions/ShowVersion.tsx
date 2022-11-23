@@ -5,22 +5,39 @@ import { ShowVersionState } from "../../constants/ShowVersion";
 import AssignmentPortal from "../../portals/AssignmentPortal";
 import { AssignmentDto } from "stumgmtbackend";
 import DataService from "../../services/DataService";
+import VersionTable from "./VersionTable";
+import { VersionDto } from "exerciseserverclientlib";
 
 export default class ShowVersion extends React.Component<React.PropsWithChildren<{}>, {table: any, showVersionState: string, assignments: AssignmentDto[] }> {
     
         constructor(props: React.PropsWithChildren<{}>) {
             super(props);
-            this.setState({table:  <Segment>
-                <Dimmer active>
-                  <Loader content='Loading' />
-                </Dimmer>
-              </Segment>});
-              this.setState({showVersionState: ShowVersionState.LOADING});
+            this.state = {table:  
+                
+                  <Loader active inline='centered' />
+                
+              , showVersionState: ShowVersionState.LOADING, assignments: []};
+
         }
 
-        handleAssignmentWindowClosed = (e: any) => {
-            this.setState({table: e});
-            this.setState({showVersionState: ShowVersionState.DRAWTABLE});
+        handleAssignmentWindowClosed = (e: AssignmentDto) => {
+            if(e != null) {
+                this.loadVersionAndDrawTable(e);
+            }
+        }
+        
+        private loadVersionAndDrawTable(assignment: AssignmentDto) {
+            let api = new DataService();
+            let client = api.getSubmissisonClient();
+            api.getGroupName(assignment).then((groupname) => {
+                client.getVersionsOfAssignment(assignment.name,groupname).then((versions) => {
+                    this.setState({table: <VersionTable versions={versions}/>});
+                    this.setState({showVersionState: ShowVersionState.DRAWTABLE});
+                });
+            });
+           
+            
+
         }
 
         private loadAssignments() {
@@ -42,10 +59,12 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
 
             return (
                 <div className="show-version">
-                    {this.state.table}
-                    {this.state.showVersionState == ShowVersionState.SELECTASSIGNMENT ? <AssignmentPortal assignments={this.state.assignments}/> : null } 
-                    
+                  {this.state.table}
+                    {this.state.showVersionState == ShowVersionState.SELECTASSIGNMENT ? <AssignmentPortal assignments={this.state.assignments}
+                    onReady={this.handleAssignmentWindowClosed}/> : null } 
                 </div>
             );
         }
     }
+
+   

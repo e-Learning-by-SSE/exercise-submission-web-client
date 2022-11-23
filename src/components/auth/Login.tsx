@@ -4,10 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, ButtonProps, Form, Message} from "semantic-ui-react";
 import Layout from "./Layout";
 import SparkyAuthentifikation from "../../services/SparkyAuthentifikation";
-import Stumgmtbackend from "../../services/Stumgmtbackend";
-import { redirect } from "react-router-dom";
-import { ErrorInterface } from "../../interface/ErrorInterface";
-import { AuthenticationInfoDto } from "sparkyservice";
+
 
 export default class Login extends React.Component<React.PropsWithChildren<{}>> {
 

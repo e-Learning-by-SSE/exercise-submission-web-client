@@ -36,9 +36,9 @@ export default class VersionTable extends React.Component<React.PropsWithChildre
         for(let version of versions) {
             tableRows.push(
             <Table.Row>
-                <Table.Cell>{version.timestamp}</Table.Cell>
+                <Table.Cell>{this.getTimeFromeTimestamp(version.timestamp)}</Table.Cell>
                 <Table.Cell>{version.author}</Table.Cell>
-                <Table.Cell><Button onClick={this.buttonPressed} id={version.timestamp}></Button></Table.Cell>
+                <Table.Cell><Button floated="left" onClick={this.buttonPressed} id={version.timestamp}>Download</Button></Table.Cell>
             </Table.Row>
             );
         }
@@ -46,10 +46,14 @@ export default class VersionTable extends React.Component<React.PropsWithChildre
 
     }
 
+    private getTimeFromeTimestamp(timestamp: number): string {
+        let formattedDate = new Date(timestamp * 1000);
+        return formattedDate.toLocaleString('en-GB');
+    }
+
     buttonPressed = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, data: ButtonProps) => {
         event.preventDefault();
         let id = data.id;
-        console.log(id);
     }
 
 
