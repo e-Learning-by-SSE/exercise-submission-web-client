@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 import DashboardContent from "./DashboardContent";
 import DashboardStateHandler from "./DashboardStateHandler";
 
-export default class SidebarComponent extends Component<React.PropsWithChildren<{menuSelected: JSX.Element}>, {menuSelected: JSX.Element}> {
+export default class SidebarComponent extends Component<React.PropsWithChildren<{menuSelected: JSX.Element, sidebarVisible: boolean}>, {menuSelected: JSX.Element}> {
 
-  constructor(props: React.PropsWithChildren<{menuSelected: JSX.Element}>) {
+  constructor(props: React.PropsWithChildren<{menuSelected: JSX.Element, sidebarVisible: boolean}>) {
     super(props);
     this.state = { menuSelected: props.menuSelected };
   
@@ -25,7 +25,7 @@ export default class SidebarComponent extends Component<React.PropsWithChildren<
               icon='labeled'
               inverted
               vertical
-              visible
+              visible={this.props.sidebarVisible}
               width='thin'
             >
               
@@ -44,7 +44,7 @@ export default class SidebarComponent extends Component<React.PropsWithChildren<
             </Sidebar>
   
             <Sidebar.Pusher>
-              <Segment basic>
+              <Segment basic placeholder>
                 <DashboardStateHandler>
                   <DashboardContent>
                       {this.props.menuSelected}
