@@ -1,9 +1,7 @@
-import React from "react";
-import * as Stumgmt from "stumgmtbackend"
 import * as Auth from "sparkyservice";
 import { ErrorInterface } from "../interface/ErrorInterface";
 import { CredentialsDto, AuthenticationInfoDto } from "sparkyservice";
-import { convertCompilerOptionsFromJson } from "typescript";
+
 
 
 

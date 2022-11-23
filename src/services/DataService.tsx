@@ -1,7 +1,7 @@
 import React from "react";
 import SparkyAuthentifikation from "./SparkyAuthentifikation";
 import Stumgmtbackend from "./Stumgmtbackend";
-import { UserDto } from "stumgmtbackend";
+import { AssignmentDto, UserDto } from "stumgmtbackend";
 import { SubmissionClient } from "./SubmissionClient";
 import { ErrorInterface } from "../interface/ErrorInterface";
 
@@ -25,7 +25,7 @@ export default class DataService {
         if (this.accesstoken != null) {
             
         }
-        return false;
+        return true;
     }
 
     public getStumgmtbackend(): Stumgmtbackend {
@@ -46,6 +46,25 @@ export default class DataService {
         let client = this.getStumgmtbackend();
         let response = await client.getCurrentUser();
         return response;
+    }
+
+    public async getGroupName(assignment: AssignmentDto): Promise<string> {
+        let user = await this.getCurrentUserDto();
+        if(assignment.collaboration) {
+            let stumgmt = this.getStumgmtbackend();
+            let group = await stumgmt.getGroup(assignment.id, user.id);
+            return group.name;
+        } else {
+            return user.username;
+        }
+    }
+
+    public async getCurrentUserDto(): Promise<UserDto> {
+        let user = this.user;
+        if(user == null) {
+            user = await this.getCurrentUser();
+        }
+        return user;
     }
 
 }

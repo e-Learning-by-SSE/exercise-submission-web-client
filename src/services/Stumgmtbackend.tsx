@@ -1,6 +1,6 @@
 import React from "react";
 import * as Stumgmt from "stumgmtbackend";
-import { AssignmentApi, AssignmentDto, AuthenticationApi, CourseApi } from "stumgmtbackend";
+import { AssignmentApi, AssignmentDto, AssignmentRegistrationApi, AuthenticationApi, CourseApi } from "stumgmtbackend";
 
 
 export default class Stumgmtbackend {
@@ -32,6 +32,11 @@ export default class Stumgmtbackend {
         return response.data;
     }
 
+    public async getGroup(assignmentid: string, userid: string) {
+        let api = new AssignmentRegistrationApi(this.config);
+        let reponse = await api.getRegisteredGroupOfUser("java-wise2021", assignmentid, userid);
+        return reponse.data;
+    }
 
 
 
