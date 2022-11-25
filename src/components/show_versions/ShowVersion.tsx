@@ -10,6 +10,8 @@ import { VersionDto } from "exerciseserverclientlib";
 
 export default class ShowVersion extends React.Component<React.PropsWithChildren<{}>, {table: any, showVersionState: string, assignments: AssignmentDto[] }> {
     
+        private selectedAssignment: AssignmentDto | null = null;;
+
         constructor(props: React.PropsWithChildren<{}>) {
             super(props);
             this.state = {table:  
@@ -25,13 +27,29 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
                 this.loadVersionAndDrawTable(e);
             }
         }
+        handleDownloadSubmission = (version: VersionDto) =>  {
+            let api = new DataService();
+            let client = api.getSubmissisonClient();
+            if(this.selectedAssignment != null) {
+                let assignment = this.selectedAssignment;
+                    api.getGroupName(this.selectedAssignment).then((groupname) => {
+                    client.downloadSubmission(assignment.name,groupname,version.timestamp).then((submission) => {
+                        return submission;
+
+                    });
+
+                });
+
+            }
+        }
         
         private loadVersionAndDrawTable(assignment: AssignmentDto) {
+            this.selectedAssignment = assignment;
             let api = new DataService();
             let client = api.getSubmissisonClient();
             api.getGroupName(assignment).then((groupname) => {
                 client.getVersionsOfAssignment(assignment.name,groupname).then((versions) => {
-                    this.setState({table: <VersionTable versions={versions}/>});
+                    this.setState({table: <VersionTable versions={versions} onClickDownloadButton={this.handleDownloadSubmission}/>});
                     this.setState({showVersionState: ShowVersionState.DRAWTABLE});
                 });
             });

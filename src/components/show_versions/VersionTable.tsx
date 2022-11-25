@@ -3,8 +3,8 @@ import React from "react";
 import { Table, Button, ButtonProps } from "semantic-ui-react";
 
 
-export default class VersionTable extends React.Component<React.PropsWithChildren<{versions: VersionDto[]}>> {
-    constructor(props: React.PropsWithChildren<{versions: VersionDto[]}>) {
+export default class VersionTable extends React.Component<React.PropsWithChildren<{versions: VersionDto[], onClickDownloadButton: (id: VersionDto) => void}>> {
+    constructor(props: React.PropsWithChildren<{versions: VersionDto[], onClickDownloadButton: (id: VersionDto) => void}>) {
         super(props);
     }
 
@@ -54,6 +54,11 @@ export default class VersionTable extends React.Component<React.PropsWithChildre
     buttonPressed = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, data: ButtonProps) => {
         event.preventDefault();
         let id = data.id;
+        let version = this.props.versions.find((version) => version.timestamp === id);
+        if(version) {
+            this.props.onClickDownloadButton(version);
+        }
+
     }
 
 

@@ -21,7 +21,6 @@ function App() {
       <Route  path="/dashboard" element={<Dashboard menuSelected={<Submit/>} />} />
       <Route  path="/submit" element={<Dashboard menuSelected={<Submit/>} />} />
       <Route  path="/version" element={<Dashboard menuSelected={<ShowVersion/>}  />} />
-      <Route  path="/account" element={<Account/>} />
     </Routes>
   </Router>
   );

@@ -1,40 +1,49 @@
 import React, { Component } from 'react'
-import { Menu, MenuItemProps } from 'semantic-ui-react'
-import { redirect } from  'react-router-dom';
+import { UserDto } from 'stumgmtbackend';
+import { Dropdown, Icon } from 'semantic-ui-react';
 
 
+export default class Account extends Component<React.PropsWithChildren<{user: UserDto}>, {dropdown: any}> {
 
-export default class MenuExampleVerticalPointing extends Component {
-  state = { activeItem: 'home' }
-
-  handleItemClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent> , { name } : {name: string}) => {
-    console.log("test");
-     this.setState({
-     activeItem: name }); 
-     redirect('/'+name); 
+    constructor(props: React.PropsWithChildren<{user: UserDto}>) {
+        super(props);
+        this.state = {dropdown: this.createAccountDropdown()};
     }
 
-  render() {
-    const { activeItem } = this.state
+    private createAccountDropdown() {
+      const trigger = (
+        <span>
+          <Icon name='user' /> Hello, {this.props.user.username}
+        </span>
+      )
+      
+      const options = [
+        {
+          key: 'user',
+          text: (
+            <span>
+              Signed in as <strong>{this.props.user.username}</strong>
+            </span>
+          ),
+          disabled: true,
+        },
+        { key: 'help', text: 'Help' },
+        { key: 'settings', text: 'Settings' },
+        { key: 'sign-out', text: 'Sign Out' },
+      ]
 
-    return (
-      <Menu pointing vertical>
-        <Menu.Item
-          name='home'
-          active={activeItem === 'home'}
-          onClick={(e,s) => this.handleItemClick}
-        />
-        <Menu.Item
-          name='messages'
-          active={activeItem === 'messages'}
-          onClick={(e,s) => this.handleItemClick}
-        />
-        <Menu.Item
-          name='friends'
-          active={activeItem === 'friends'}
-          onClick={(e,s) => this.handleItemClick}
-        />
-      </Menu>
-    )
-  }
+      return <Dropdown trigger={trigger} options={options} />;
+    }
+
+
+    render() {
+        return (
+           <div className="accountDropdown">
+               {this.state.dropdown}
+           </div>
+        )
+    }
 }
+
+
+

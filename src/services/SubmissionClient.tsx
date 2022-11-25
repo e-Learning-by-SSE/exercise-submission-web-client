@@ -35,6 +35,13 @@ export class SubmissionClient {
         return versions;
     }
 
+    public async downloadSubmission(assignmentId: string, group: string, versiontimestamp: number): Promise<Api.FileDto[]> {
+        let api = new SubmissionApi(this.config);
+        let fileResponse = await api.getVersion(process.env.REACT_APP_COURSEID || "java-wise2021", assignmentId, group, versiontimestamp);
+        let files = fileResponse.data;
+        return files;
+    }
+
     /*
     private async getFilesInFileDTO(paths: string[]): Promise<Api.FileDto[]> {
         //get over all files recursibve in a folder
