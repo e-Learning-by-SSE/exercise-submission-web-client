@@ -4,6 +4,8 @@ import { SubmitState } from "../../constants/Submit";
 import TreeView from "./TreeView";
 import { Zip } from "../../util/ZipHelper";
 import JSZip from "jszip";
+import Stack from "../../stacks/Stack";
+import { SubmitStack } from "../../stacks/SubmitStack";
 
 
 
@@ -53,6 +55,8 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
             </div>);
         
     }
+
+    
   
 
     fileChange = (event: React.DragEvent<HTMLDivElement>) => {
@@ -79,8 +83,8 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
             <div className="submit">
                 {this.state.submitState== SubmitState.DROPFILE ? this.dropfilecode :
                  this.state.submitState== SubmitState.FILETREE ? this.filetreecode : null}
+            <Stack stack={SubmitStack} selected={this.state.submitState} />
             </div>
-
         );
     }
 

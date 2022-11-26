@@ -7,6 +7,8 @@ import { AssignmentDto } from "stumgmtbackend";
 import DataService from "../../services/DataService";
 import VersionTable from "./VersionTable";
 import { VersionDto } from "exerciseserverclientlib";
+import { ShowVersionStack } from "../../stacks/ShowVersionStack";
+import Stack from "../../stacks/Stack";
 
 export default class ShowVersion extends React.Component<React.PropsWithChildren<{}>, {table: any, showVersionState: string, assignments: AssignmentDto[] }> {
     
@@ -80,6 +82,8 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
                   {this.state.table}
                     {this.state.showVersionState == ShowVersionState.SELECTASSIGNMENT ? <AssignmentPortal assignments={this.state.assignments}
                     onReady={this.handleAssignmentWindowClosed}/> : null } 
+                    {this.state.showVersionState != ShowVersionState.LOADING ?
+                    <Stack stack={ShowVersionStack} selected={this.state.showVersionState} /> : null}
                 </div>
             );
         }
