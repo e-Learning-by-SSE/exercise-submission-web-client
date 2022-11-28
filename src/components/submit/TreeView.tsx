@@ -1,6 +1,6 @@
 import JSZip from "jszip";
 import React, { PropsWithChildren } from "react";
-import { List } from "semantic-ui-react";
+import { List , Segment} from "semantic-ui-react";
 import PathHelper from "../../util/PathHelper";
 import FileTreeElement from "./FileTreeElement";
 
@@ -24,25 +24,18 @@ export default class TreeView extends React.Component<PropsWithChildren<{ fileli
         //first ebene
 
         for(let file of baseFileList) {
-            let path = new PathHelper(file.name);
-            if(path.getPathElements()[0] == maindir && path.getPathElements().length == 2) {
-                fileList.push(new FileTreeElement(file, file.dir));
-            }
+            if(!file.dir)
+           fileList.push(this.generateListElement(file));
         }
 
-        for(let basedirs of fileList) {
-            
-            
-
-            
-
-
-
-        }
 
         return (
             <div className="tree-view">
-             
+                <Segment>
+                 <List>
+                    {fileList}
+                </List>
+                </Segment>
             </div>
 
 
@@ -51,13 +44,11 @@ export default class TreeView extends React.Component<PropsWithChildren<{ fileli
     }
 
    
-    
-    
 
 
     private generateListElement(file : JSZip.JSZipObject): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
         return (
-            <List.Item>
+            <List.Item key={file.name}>
                 <List.Icon name='file' />
                 <List.Content>
                     <List.Header>{file.name}</List.Header>
@@ -67,10 +58,6 @@ export default class TreeView extends React.Component<PropsWithChildren<{ fileli
     }
 
  
-
-    
-
-
     render(){
         return this.generateTreeViewFromFileSystem();
     }
