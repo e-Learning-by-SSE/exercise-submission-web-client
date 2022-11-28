@@ -4,5 +4,6 @@ export interface StackInterface {
     step: string,
     description: string,
     id: string,
-    icon: SemanticICONS
+    icon: SemanticICONS,
+    order: number
 }

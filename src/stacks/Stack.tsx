@@ -1,7 +1,6 @@
 import React from "react";
 import { StackInterface } from "../interface/StackInterface";
 import {Step, Icon} from "semantic-ui-react";
-import { isJSDocThisTag } from "typescript";
 
 
 export default class Stack extends React.Component<React.PropsWithChildren<{stack: StackInterface[], selected: string}>> {
@@ -13,7 +12,7 @@ export default class Stack extends React.Component<React.PropsWithChildren<{stac
     private createStepChain() {
         return(
 
-            <Step.Group ordered size="mini" atached="top">
+            <Step.Group size="mini" atached="top">
                 {this.createSteps()}
             </Step.Group>
 
@@ -25,48 +24,42 @@ export default class Stack extends React.Component<React.PropsWithChildren<{stac
 
         const steps = [];
         let stack = this.props.stack;
-        let active = false;
+       
 
-        let stepStates = this.getStepStates();
+        let selectedStack = stack.find((stack) => stack.id === this.props.selected);
+        if(selectedStack != undefined) {
+            let selectedOrder = selectedStack.order;
+            for(let i = 0; i < stack.length; i++) {
+             let step = stack.find((stack) => stack.order === i+1);
 
-       for(let i = stack.length - 1; i >= 0; i--) {
-        let step = stack[i];
-        let stepState = stepStates.find((element) => element.number == i);
-        if(stepState) {
-           steps.push(  
-           <Step active={stepState.active} completed={stepState.completed}>
-            <Icon name={step.icon} />
-            <Step.Content>
-              <Step.Title>{step.step}</Step.Title>
-              <Step.Description>{step.description}</Step.Description>
-            </Step.Content>
-          </Step>)
+             if(step != undefined) {
+                let active = false;
+                let completed = false;
+                    if(step.id == selectedStack.id) {
+                        active = true;
+                    }
+                    if(step.order < selectedOrder) {
+                        completed = true;
+                    }
+                
+                    steps.push(  
+                    <Step active={active} completed={completed}>
+                        <Icon name={step.icon} />
+                    <Step.Content>
+                        <Step.Title>{step.step}</Step.Title>
+                        <Step.Description>{step.description}</Step.Description>
+                    </Step.Content>
+                </Step>)
+             }
+             
+         }
+           
         }
-        
-    }
+
         return steps;
 
     }
 
-    private getStepStates() {
-        
-        const states = [];
-        let completed = false;
-        for(let i = this.props.stack.length-1; i >=0; i--) {
-            let step = this.props.stack[i];
-            if(step.id == this.props.selected) {
-                states.push({number: i, active: true, completed: completed});
-             
-            } else {
-                states.push({number: i, active: false, completed: completed});
-                completed = true;
-            }
-
-        }
-        return states;
-
-     
-    }
 
 
     render() {
