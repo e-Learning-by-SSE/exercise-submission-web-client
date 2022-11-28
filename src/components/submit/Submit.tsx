@@ -1,5 +1,5 @@
 import React from "react";
-import {Button , Segment, Header, Icon, ButtonProps, Form} from "semantic-ui-react";
+import {Button , Segment, Header, Icon, ButtonProps, Form, Menu} from "semantic-ui-react";
 import { SubmitState } from "../../constants/Submit";
 import TreeView from "./TreeView";
 import { Zip } from "../../util/ZipHelper";
@@ -40,10 +40,10 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
     private getFileTreeCode(filelist: JSZip.JSZipObject[]): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
         return (
             <div className="file-tree-component">
-                <TreeView filelist={filelist}/>
                 <div className="upload-button">
                     {this.getUploadButton()}
                 </div>
+                <TreeView filelist={filelist}/>
             </div>
         );
     }
@@ -51,7 +51,20 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
     private getUploadButton(): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
         return (
             <div className="upload-button">
-                <Button>Upload</Button>
+                <Menu secondary>
+                    <Menu.Item>
+                        <Button animated icon color="red">
+                            <Button.Content visible><Icon name="refresh"></Icon>Retry</Button.Content>
+                            <Button.Content hidden><Icon name="refresh"></Icon></Button.Content>
+                        </Button>
+                    </Menu.Item>
+                    <Menu.Item position="right" >
+                        <Button animated icon >
+                            <Button.Content visible><Icon name="upload"></Icon>Upload</Button.Content>
+                            <Button.Content hidden><Icon name="upload"></Icon></Button.Content>
+                        </Button>
+                    </Menu.Item>
+                </Menu>
             </div>);
         
     }
