@@ -6,17 +6,19 @@ import { Zip } from "../../util/ZipHelper";
 import JSZip from "jszip";
 import Stack from "../../stacks/Stack";
 import { SubmitStack } from "../../stacks/SubmitStack";
+import ErrorPortal from "../../portals/ErrorPortal";
 
 
 
-export default class Submit extends React.Component<React.PropsWithChildren<{}>, {submitState: string}> {
+export default class Submit extends React.Component<React.PropsWithChildren<{}>, {submitState: string, error: {header: string, description:string} | null}> {
 
     private dropfilecode: React.ReactElement<any, string | React.JSXElementConstructor<any>> ;
     private filetreecode: React.ReactElement<any, string | React.JSXElementConstructor<any>> | null = null;
 
     constructor(props: React.PropsWithChildren<{}>) {
         super(props);
-        this.state = {submitState: SubmitState.DROPFILE};
+        this.state = {submitState: SubmitState.DROPFILE,
+            error: null};
         this.dropfilecode = this.getDropFileCode();
         
 
@@ -29,7 +31,7 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
             <Segment placeholder>
                 <Header icon>
                 <Icon name='file code outline' />
-                No documents are listed for this customer.
+                Drop a Zip File or Files
                 </Header>
             </Segment>
         </div>
@@ -37,7 +39,7 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
 
     }
 
-    private getFileTreeCode(filelist: JSZip.JSZipObject[]): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
+    private getFileTreeCode(filelist: JSZip.JSZipObject[] | FileList): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
         return (
             <div className="file-tree-component">
                 <div className="upload-button">
@@ -75,13 +77,22 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
     fileChange = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         let filelist = event.dataTransfer.files;
-        let zip = new Zip(filelist[0]).getFiles();
+        if(filelist.length == 1 && filelist[0].name.endsWith(".zip")) {
+           
+            let zip = new Zip(filelist[0]).getFiles();
+    
+            zip.then((filelist) => {
+                this.filetreecode = this.getFileTreeCode(filelist);
+                this.setState({submitState: SubmitState.FILETREE});
+            });
 
-        zip.then((filelist) => {
+        } else if(filelist.length > 1 && filelist[0].name.endsWith(".zip")) {
+            this.setState({error: {header: "Invalid Files", description: "Dont drop more than one Zip File"}});
+        } else {
             this.filetreecode = this.getFileTreeCode(filelist);
             this.setState({submitState: SubmitState.FILETREE});
-        });
-        
+        }
+           
 
     }
 
@@ -96,6 +107,8 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
             <div className="submit">
                 {this.state.submitState== SubmitState.DROPFILE ? this.dropfilecode :
                  this.state.submitState== SubmitState.FILETREE ? this.filetreecode : null}
+
+                {this.state.error ? <ErrorPortal error={this.state.error} onReady={() =>{this.setState({submitState: SubmitState.DROPFILE})}}/>: null}
             <Stack stack={SubmitStack} selected={this.state.submitState} />
             </div>
         );
