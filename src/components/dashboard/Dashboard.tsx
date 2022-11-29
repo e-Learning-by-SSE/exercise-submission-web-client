@@ -5,12 +5,12 @@ import SidebarComponent from "./Sidebar";
 import "./dashboard.css";
 import { BrowserRouter } from "react-router-dom";
 
-export default class Dashboard extends Component<React.PropsWithChildren<{menuSelected: any}>, {menuSelected: any, sidebarVisible: boolean}> {
+export default class Dashboard extends Component<React.PropsWithChildren<{menuSelected: any, onChangeDarkMode: (darkmode: boolean) => void}>, {menuSelected: any, sidebarVisible: boolean}> {
 
-  constructor(props: React.PropsWithChildren<{menuSelected: any}>) {
+  constructor(props: React.PropsWithChildren<{menuSelected: any, onChangeDarkMode: (darkmode: boolean) => void}>) {
     super(props);
     this.state = {menuSelected: props.menuSelected,
-                  sidebarVisible: true};
+                  sidebarVisible: true,};
   }
 
   onChangeVisibility = () => {
@@ -27,7 +27,7 @@ export default class Dashboard extends Component<React.PropsWithChildren<{menuSe
      /* returns a Dashboard in semantic ui with sidebar and a header with login and account */
 
     return (
-      <div className = "dashboard">  <Header onChangeVisbility={this.onChangeVisibility}/> <SidebarComponent menuSelected={this.props.menuSelected} sidebarVisible={this.state.sidebarVisible} /> </div>
+      <div className = "dashboard">  <Header onChangeVisbility={this.onChangeVisibility} onChangeDarkMode={this.props.onChangeDarkMode}/> <SidebarComponent menuSelected={this.props.menuSelected} sidebarVisible={this.state.sidebarVisible} /> </div>
       );
 
   }
