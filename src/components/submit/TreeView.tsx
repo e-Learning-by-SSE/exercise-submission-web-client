@@ -5,11 +5,11 @@ import PathHelper from "../../util/PathHelper";
 import FileTreeElement from "./FileTreeElement";
 
 
-export default class TreeView extends React.Component<PropsWithChildren<{ filelist: JSZip.JSZipObject[] }>> {
+export default class TreeView extends React.Component<PropsWithChildren<{ filelist: JSZip.JSZipObject[] | FileList}>> {
 
   
 
-    constructor(props: PropsWithChildren<{ filelist: JSZip.JSZipObject[] }>) {
+    constructor(props: PropsWithChildren<{ filelist: JSZip.JSZipObject[] | FileList }>) {
         super(props);
      
     }
@@ -18,16 +18,21 @@ export default class TreeView extends React.Component<PropsWithChildren<{ fileli
 
         const fileList = [];
         const baseFileList = this.props.filelist
+
+        if(baseFileList instanceof FileList) {
+            for(let file of baseFileList) {
+               fileList.push(this.generateListElement(file));
+            }
+
+        } else{
+
+            let maindir = new PathHelper(baseFileList.at(0)?.name as string).getPathElements()[0];
+    
+            //first ebene
+    
+
+        }    
         
-        let maindir = new PathHelper(baseFileList.at(0)?.name as string).getPathElements()[0];
-
-        //first ebene
-
-        for(let file of baseFileList) {
-            if(!file.dir)
-           fileList.push(this.generateListElement(file));
-        }
-
 
         return (
             <div className="tree-view">
@@ -46,7 +51,7 @@ export default class TreeView extends React.Component<PropsWithChildren<{ fileli
    
 
 
-    private generateListElement(file : JSZip.JSZipObject): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
+    private generateListElement(file : JSZip.JSZipObject | File): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
         return (
             <List.Item key={file.name}>
                 <List.Icon name='file' />
