@@ -43,7 +43,7 @@ export default class Stack extends React.Component<React.PropsWithChildren<{stac
                     }
                 
                     steps.push(  
-                    <Step active={active} completed={completed}>
+                    <Step active={active} completed={completed} key={i}>
                         <Icon name={step.icon} />
                     <Step.Content>
                         <Step.Title>{step.step}</Step.Title>

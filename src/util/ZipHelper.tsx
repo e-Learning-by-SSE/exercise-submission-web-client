@@ -1,5 +1,6 @@
 import React from "react";
 import JSZip from "jszip";
+import { FileDto } from "exerciseserverclientlib";
 
 
 export class Zip {
@@ -21,6 +22,16 @@ export class Zip {
         });
 
     }
+
+    public static async getZipFile(files: FileDto[]): Promise<JSZip> {
+        let zip = new JSZip();
+        for(let file of files) {
+            zip.file(file.path, file.content);
+        }
+        return zip;
+    }
+
+
 
 
 

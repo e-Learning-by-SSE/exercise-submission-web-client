@@ -9,8 +9,9 @@ import VersionTable from "./VersionTable";
 import { VersionDto } from "exerciseserverclientlib";
 import { ShowVersionStack } from "../../stacks/ShowVersionStack";
 import Stack from "../../stacks/Stack";
+import DownloadSubmissionModal from "./DownloadSubmissionModal";
 
-export default class ShowVersion extends React.Component<React.PropsWithChildren<{}>, {table: any, showVersionState: string, assignments: AssignmentDto[] }> {
+export default class ShowVersion extends React.Component<React.PropsWithChildren<{}>, {table: any, showVersionState: string, assignments: AssignmentDto[], showModal: any }> {
     
         private selectedAssignment: AssignmentDto | null = null;;
 
@@ -20,7 +21,8 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
                 
                   <Loader active inline='centered' />
                 
-              , showVersionState: ShowVersionState.LOADING, assignments: []};
+              ,showModal: null
+              ,showVersionState: ShowVersionState.LOADING, assignments: []};
 
         }
 
@@ -29,15 +31,17 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
                 this.loadVersionAndDrawTable(e);
             }
         }
-        handleDownloadSubmission = (version: VersionDto) =>  {
+
+        handleDownloadSubmission = (version: VersionDto, creatingDownloadComplete: () => void) =>  {
             let api = new DataService();
             let client = api.getSubmissisonClient();
             if(this.selectedAssignment != null) {
                 let assignment = this.selectedAssignment;
                     api.getGroupName(this.selectedAssignment).then((groupname) => {
-                    client.downloadSubmission(assignment.name,groupname,version.timestamp).then((submission) => {
-                        return submission;
-
+                    client.downloadSubmission(assignment.name,groupname,version.timestamp).then((submission) => {                      
+                        creatingDownloadComplete();
+                        this.setState({showModal: <DownloadSubmissionModal onClosed={() => {}} files={submission}
+                        group={groupname} version={version} />});
                     });
 
                 });
@@ -82,6 +86,7 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
                   {this.state.table}
                     {this.state.showVersionState == ShowVersionState.SELECTASSIGNMENT ? <AssignmentPortal assignments={this.state.assignments}
                     onReady={this.handleAssignmentWindowClosed}/> : null } 
+                    {this.state.showModal}
                     {this.state.showVersionState != ShowVersionState.LOADING ?
                     <Stack stack={ShowVersionStack} selected={this.state.showVersionState} /> : null}
                 </div>
