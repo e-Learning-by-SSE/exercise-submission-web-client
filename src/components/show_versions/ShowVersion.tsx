@@ -40,7 +40,7 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
                     api.getGroupName(this.selectedAssignment).then((groupname) => {
                     client.downloadSubmission(assignment.name,groupname,version.timestamp).then((submission) => {                      
                         creatingDownloadComplete();
-                        this.setState({showModal: <DownloadSubmissionModal onClosed={() => {}} files={submission}
+                        this.setState({showModal: <DownloadSubmissionModal onClosed={() => {this.setState({showModal: null})}} files={submission}
                         group={groupname} version={version} />});
                     });
 
