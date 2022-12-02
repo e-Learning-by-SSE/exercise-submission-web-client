@@ -1,5 +1,5 @@
 import React from "react";
-import {Button , Segment, Header, Icon, ButtonProps, Form, Menu} from "semantic-ui-react";
+import {Button , Segment, Header, Icon, Menu} from "semantic-ui-react";
 import { SubmitState } from "../../constants/Submit";
 import TreeView from "./TreeView";
 import { Zip } from "../../util/ZipHelper";
@@ -7,10 +7,11 @@ import JSZip from "jszip";
 import Stack from "../../stacks/Stack";
 import { SubmitStack } from "../../stacks/SubmitStack";
 import ErrorPortal from "../../portals/ErrorPortal";
+import SubmitModal from "./SubmitModal";
 
 
 
-export default class Submit extends React.Component<React.PropsWithChildren<{}>, {submitState: string, error: {header: string, description:string} | null}> {
+export default class Submit extends React.Component<React.PropsWithChildren<{}>, {submitState: string, error: {header: string, description:string} | null, filelist: JSZip.JSZipObject[] | FileList | null}> {
 
     private dropfilecode: React.ReactElement<any, string | React.JSXElementConstructor<any>> ;
     private filetreecode: React.ReactElement<any, string | React.JSXElementConstructor<any>> | null = null;
@@ -18,7 +19,8 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
     constructor(props: React.PropsWithChildren<{}>) {
         super(props);
         this.state = {submitState: SubmitState.DROPFILE,
-            error: null};
+            error: null,
+            filelist: null};
         this.dropfilecode = this.getDropFileCode();
         
 
@@ -55,13 +57,13 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
             <div className="upload-button">
                 <Menu secondary>
                     <Menu.Item>
-                        <Button animated icon color="red">
+                        <Button animated icon color="red" onClick={() => {this.setState({submitState: SubmitState.DROPFILE})}}>
                             <Button.Content visible><Icon name="refresh"></Icon>Retry</Button.Content>
                             <Button.Content hidden><Icon name="refresh"></Icon></Button.Content>
                         </Button>
                     </Menu.Item>
                     <Menu.Item position="right" >
-                        <Button animated icon >
+                        <Button animated icon onClick={this.onUpload}>
                             <Button.Content visible><Icon name="upload"></Icon>Upload</Button.Content>
                             <Button.Content hidden><Icon name="upload"></Icon></Button.Content>
                         </Button>
@@ -71,26 +73,33 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
         
     }
 
+    onUpload = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        event.preventDefault();
+        this.setState({submitState: SubmitState.UPLOAD});
+
+
+    }
+
     
   
 
     fileChange = (event: React.DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         let filelist = event.dataTransfer.files;
-        if(filelist.length == 1 && filelist[0].name.endsWith(".zip")) {
+        if(filelist.length === 1 && filelist[0].name.endsWith(".zip")) {
            
             let zip = new Zip(filelist[0]).getFiles();
     
             zip.then((filelist) => {
                 this.filetreecode = this.getFileTreeCode(filelist);
-                this.setState({submitState: SubmitState.FILETREE});
+                this.setState({submitState: SubmitState.FILETREE, filelist: filelist});
             });
 
         } else if(filelist.length > 1 && filelist[0].name.endsWith(".zip")) {
             this.setState({error: {header: "Invalid Files", description: "Dont drop more than one Zip File"}});
         } else {
             this.filetreecode = this.getFileTreeCode(filelist);
-            this.setState({submitState: SubmitState.FILETREE});
+            this.setState({submitState: SubmitState.FILETREE, filelist: filelist});
         }
            
 
@@ -105,8 +114,9 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
     render() {
         return (
             <div className="submit">
-                {this.state.submitState== SubmitState.DROPFILE ? this.dropfilecode :
-                 this.state.submitState== SubmitState.FILETREE ? this.filetreecode : null}
+                {this.state.submitState=== SubmitState.DROPFILE ? this.dropfilecode :
+                 this.state.submitState=== SubmitState.FILETREE ? this.filetreecode : 
+                 this.state.submitState=== SubmitState.UPLOAD ? <SubmitModal files={this.state.filelist}/> : null}
 
                 {this.state.error ? <ErrorPortal error={this.state.error} onReady={() =>{this.setState({submitState: SubmitState.DROPFILE})}}/>: null}
             <Stack stack={SubmitStack} selected={this.state.submitState} />
