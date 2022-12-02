@@ -20,7 +20,7 @@ export default class PathHelper {
         let dirElements = this.getElements(dir);
         let pathElements = this.getPathElements();
 
-        if(pathElements.length > 1 && dirElements[dirElements.length-1] == pathElements[pathElements.length-2]) {
+        if(pathElements.length > 1 && dirElements[dirElements.length-1] === pathElements[pathElements.length-2]) {
             return true;
         } else {
             return false;

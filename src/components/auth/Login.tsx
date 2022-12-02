@@ -1,7 +1,6 @@
-import { RecordWithTtl } from "dns";
-import React, { Component, PropsWithChildren } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button, ButtonProps, Form, Message} from "semantic-ui-react";
+import { Button, ButtonProps, Form} from "semantic-ui-react";
 import Layout from "./Layout";
 import SparkyAuthentifikation from "../../services/SparkyAuthentifikation";
 

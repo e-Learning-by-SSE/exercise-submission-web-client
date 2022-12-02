@@ -17,7 +17,7 @@ export default class DashboardStateHandler extends React.Component<React.PropsWi
         render() {
 
 
-            if(this.props.children != this.state.baseMenu) {
+            if(this.props.children !== this.state.baseMenu) {
                 this.setState({baseMenu: this.props.children});
                 this.setState({selectedMenu: this.props.children});
             } 

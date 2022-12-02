@@ -5,9 +5,6 @@ import {Step, Icon} from "semantic-ui-react";
 
 export default class Stack extends React.Component<React.PropsWithChildren<{stack: StackInterface[], selected: string}>> {
 
-    constructor(props: React.PropsWithChildren<{stack: StackInterface[], selected: string}>) {
-        super(props);
-    }
 
     private createStepChain() {
         return(
@@ -27,15 +24,15 @@ export default class Stack extends React.Component<React.PropsWithChildren<{stac
        
 
         let selectedStack = stack.find((stack) => stack.id === this.props.selected);
-        if(selectedStack != undefined) {
+        if(selectedStack !== undefined) {
             let selectedOrder = selectedStack.order;
             for(let i = 0; i < stack.length; i++) {
              let step = stack.find((stack) => stack.order === i+1);
 
-             if(step != undefined) {
+             if(step !== undefined) {
                 let active = false;
                 let completed = false;
-                    if(step.id == selectedStack.id) {
+                    if(step.id === selectedStack.id) {
                         active = true;
                     }
                     if(step.order < selectedOrder) {

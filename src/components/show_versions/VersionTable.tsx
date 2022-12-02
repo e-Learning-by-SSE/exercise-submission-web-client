@@ -6,6 +6,7 @@ import HeaderSubHeader from "semantic-ui-react/dist/commonjs/elements/Header/Hea
 
 export default class VersionTable extends React.Component<React.PropsWithChildren<{versions: VersionDto[], onClickDownloadButton: (id: VersionDto, creatingDownloadComplete: () => void) => void}>,
     {selectedButtonLoading: {versionTimestamp: number, loading: boolean}}> {
+        
     constructor(props: React.PropsWithChildren<{versions: VersionDto[], onClickDownloadButton: (id: VersionDto) => void}>) {
         super(props);
         this.state = {selectedButtonLoading: {versionTimestamp: 0, loading: false}};

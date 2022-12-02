@@ -1,4 +1,3 @@
-import { queryByDisplayValue } from "@testing-library/react";
 import React from "react";
 import { Header, Modal, Grid, Placeholder, Button, Icon } from "semantic-ui-react";
 import DataService from "../../services/DataService";
@@ -41,7 +40,7 @@ export default class Help extends React.Component<React.PropsWithChildren<{ onCl
 
     private createInformationContent() {
         let api = new DataService();
-        let user = api.getCurrentUserDto().then((user) => {
+        api.getCurrentUserDto().then((user) => {
                 this.setState({informationContent: <><Grid.Row>
                     <Header size="small">{user.username}</Header>
                 </Grid.Row><Grid.Row>

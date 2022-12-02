@@ -1,12 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import Login from "./components/auth/Login";
 import Signup from "./components/auth/Signup";
 import Done from "./components/auth/Done";
 import Dashboard from "./components/dashboard/Dashboard";
-import Account from "./components/account/Account";
 import Submit from './components/submit/Submit';
 import ShowVersion from './components/show_versions/ShowVersion';
 

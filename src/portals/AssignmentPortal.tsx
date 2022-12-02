@@ -16,7 +16,7 @@ export default class AssignmentPortal extends React.Component<React.PropsWithChi
     handleComboBoxSelection = (event: React.SyntheticEvent<HTMLElement, Event>, data: any) => {
         event.preventDefault();
         let id = data.value;
-        let assignment = this.props.assignments.find(assignment => assignment.id == id);
+        let assignment = this.props.assignments.find(assignment => assignment.id === id);
         if(assignment) {
             this.setState({selectedAssigment: assignment});
             this.props.onReady(assignment);

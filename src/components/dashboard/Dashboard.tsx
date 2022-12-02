@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import { Sidebar } from "semantic-ui-react";
 import Header from "./Header";
 import SidebarComponent from "./Sidebar";
 import "./dashboard.css";
-import { BrowserRouter } from "react-router-dom";
 
 export default class Dashboard extends Component<React.PropsWithChildren<{menuSelected: any, onChangeDarkMode: (darkmode: boolean) => void}>, {menuSelected: any, sidebarVisible: boolean}> {
 

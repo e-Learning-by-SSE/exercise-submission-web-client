@@ -5,9 +5,6 @@ import logo from "../../images/icon.png";
 
 export default class Layout extends React.Component<React.PropsWithChildren<{ header: string }>> {
 
-    constructor(props: any) {
-        super(props);
-    }
 
     render() {
         return (

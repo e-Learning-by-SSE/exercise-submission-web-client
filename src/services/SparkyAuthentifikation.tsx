@@ -15,8 +15,6 @@ export default class SparkyAuthentifikation {
 
         this.config = SparkyAuthentifikation.getConfig();
 
-        
-        
     }
     
     public async authenticate(username:string, password:string): Promise<ErrorInterface<AuthenticationInfoDto>> {
@@ -52,8 +50,8 @@ export default class SparkyAuthentifikation {
     }
 
     public static async checkToken(token: string): Promise<boolean> {
-        let auth = new Auth.AuthControllerApi(SparkyAuthentifikation.getConfig());
-        let response = await auth.checkTokenAuthenticationStatus();
+       // let auth = new Auth.AuthControllerApi(SparkyAuthentifikation.getConfig());
+       // let response = await auth.checkTokenAuthenticationStatus();
         return true;
     }
 }

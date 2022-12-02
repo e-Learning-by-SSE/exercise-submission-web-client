@@ -1,6 +1,6 @@
 import React from "react";
 
-import {Segment, Dimmer, Loader} from "semantic-ui-react";
+import { Loader} from "semantic-ui-react";
 import { ShowVersionState } from "../../constants/ShowVersion";
 import AssignmentPortal from "../../portals/AssignmentPortal";
 import { AssignmentDto } from "stumgmtbackend";
@@ -76,7 +76,7 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
 
 
         render(): React.ReactNode {
-            if(this.state.showVersionState == ShowVersionState.LOADING) {
+            if(this.state.showVersionState === ShowVersionState.LOADING) {
                 this.loadAssignments();
             }
 
@@ -84,10 +84,10 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
             return (
                 <div className="show-version">
                   {this.state.table}
-                    {this.state.showVersionState == ShowVersionState.SELECTASSIGNMENT ? <AssignmentPortal assignments={this.state.assignments}
+                    {this.state.showVersionState === ShowVersionState.SELECTASSIGNMENT ? <AssignmentPortal assignments={this.state.assignments}
                     onReady={this.handleAssignmentWindowClosed}/> : null } 
                     {this.state.showModal}
-                    {this.state.showVersionState != ShowVersionState.LOADING ?
+                    {this.state.showVersionState !== ShowVersionState.LOADING ?
                     <Stack stack={ShowVersionStack} selected={this.state.showVersionState} /> : null}
                 </div>
             );

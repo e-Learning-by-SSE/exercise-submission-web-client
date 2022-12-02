@@ -1,4 +1,4 @@
-import Api, { VersionDto, Configuration, SubmissionApi} from "exerciseserverclientlib"
+import Api, { Configuration, SubmissionApi, FileDto, SubmissionResultDto} from "exerciseserverclientlib"
 
 
 
@@ -15,18 +15,14 @@ export class SubmissionClient {
 
         this.config.baseOptions = { headers: { Authorization: "Bearer " + accesstoken } };
     }
-/*
-    public async submitAssignment(assignmentId: string, groupName: string ,paths: string[]) {
+
+    public async submitAssignment(assignmentId: string, groupName: string ,files: FileDto[]): Promise<Api.SubmissionResultDto>{
         let api = new Api.SubmissionApi(this.config);
         let courseID = process.env.REACT_APP_COURSEID || "java-wise2021";
-        
-        let files: Api.FileDto[] = await this.getFilesInFileDTO(paths);
-        let response = api.submit(courseID, assignmentId, groupName, files);
-
-    
-        console.log(response);
+        let response = await api.submit(courseID, assignmentId, groupName, files);
+        return response.data;
     }
-    */
+    
     
     public async getVersionsOfAssignment(assignmentId: string, group: string): Promise<Api.VersionDto[]> {
         let api = new SubmissionApi(this.config);

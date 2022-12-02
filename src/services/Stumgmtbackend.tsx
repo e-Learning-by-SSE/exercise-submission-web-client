@@ -1,4 +1,3 @@
-import React from "react";
 import * as Stumgmt from "stumgmtbackend";
 import { AssignmentApi, AssignmentDto, AssignmentRegistrationApi, AuthenticationApi, CourseApi } from "stumgmtbackend";
 
