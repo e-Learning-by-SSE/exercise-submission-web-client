@@ -6,7 +6,6 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'cd /var/lib/jenkins/workspace/Teaching_exercise-submitter-web-client'
                 sh 'npm install'
                 sh 'npm run build'
             }
