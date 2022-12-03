@@ -11,7 +11,8 @@ import SubmitModal from "./SubmitModal";
 
 
 
-export default class Submit extends React.Component<React.PropsWithChildren<{}>, {submitState: string, error: {header: string, description:string} | null, filelist: JSZip.JSZipObject[] | FileList | null}> {
+export default class Submit extends React.Component<React.PropsWithChildren<{}>, {submitState: string, error: {header: string, description:string} | null,
+ filelist: JSZip.JSZipObject[] | FileList | null,submitModal: any}> {
 
     private dropfilecode: React.ReactElement<any, string | React.JSXElementConstructor<any>> ;
     private filetreecode: React.ReactElement<any, string | React.JSXElementConstructor<any>> | null = null;
@@ -20,7 +21,8 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
         super(props);
         this.state = {submitState: SubmitState.DROPFILE,
             error: null,
-            filelist: null};
+            filelist: null,
+            submitModal: null};
         this.dropfilecode = this.getDropFileCode();
         
 
@@ -76,8 +78,6 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
     onUpload = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         this.setState({submitState: SubmitState.UPLOAD});
-
-
     }
 
     

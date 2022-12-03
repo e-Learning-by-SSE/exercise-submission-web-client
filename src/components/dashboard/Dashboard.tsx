@@ -25,7 +25,8 @@ export default class Dashboard extends Component<React.PropsWithChildren<{menuSe
      /* returns a Dashboard in semantic ui with sidebar and a header with login and account */
 
     return (
-      <div className = "dashboard">  <Header onChangeVisbility={this.onChangeVisibility} onChangeDarkMode={this.props.onChangeDarkMode}/> <SidebarComponent menuSelected={this.props.menuSelected} sidebarVisible={this.state.sidebarVisible} /> </div>
+      <div className = "dashboard">  <Header onChangeVisbility={this.onChangeVisibility} onChangeDarkMode={this.props.onChangeDarkMode}/> 
+      <div style={{height: '100vh'}}><SidebarComponent menuSelected={this.props.menuSelected} sidebarVisible={this.state.sidebarVisible} /></div></div>
       );
 
   }

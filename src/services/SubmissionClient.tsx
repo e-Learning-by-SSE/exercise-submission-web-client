@@ -1,4 +1,5 @@
 import Api, { Configuration, SubmissionApi, FileDto, SubmissionResultDto} from "exerciseserverclientlib"
+import JSZip from "jszip";
 
 
 
@@ -16,10 +17,11 @@ export class SubmissionClient {
         this.config.baseOptions = { headers: { Authorization: "Bearer " + accesstoken } };
     }
 
-    public async submitAssignment(assignmentId: string, groupName: string ,files: FileDto[]): Promise<Api.SubmissionResultDto>{
-        let api = new Api.SubmissionApi(this.config);
+    public async submitAssignment(assignmentId: string, groupName: string ,files: FileList | JSZip.JSZipObject[]): Promise<Api.SubmissionResultDto>{
+        let api = new SubmissionApi(this.config);
         let courseID = process.env.REACT_APP_COURSEID || "java-wise2021";
-        let response = await api.submit(courseID, assignmentId, groupName, files);
+        let fileDtos = await SubmissionClient.convertFileListoFileDtoList(files);
+        let response = await api.submit(courseID, assignmentId, groupName, fileDtos);
         return response.data;
     }
     
@@ -38,30 +40,30 @@ export class SubmissionClient {
         return files;
     }
 
-    /*
-    private async getFilesInFileDTO(paths: string[]): Promise<Api.FileDto[]> {
-        //get over all files recursibve in a folder
+   private static async convertFileListoFileDtoList(fileList: FileList| JSZip.JSZipObject[]): Promise<Api.FileDto[]> {
+
         let files: FileDto[] = [];
-        for (const path of paths) {
-            let fileDto: FileDto = {
-                path: path,
-                content: await this.readFile(path)
+        for (let i = 0; i < fileList.length; i++) {
+            let file = fileList[i];
+            let fileDto: FileDto;
+            if(file instanceof File) {
+                fileDto = { path: file.name, content: await SubmissionClient.fileToBase64(file)};
+            } else {
+                fileDto = { path: file.name, content: await file.async("base64") };
             }
-            files.push(fileDto);  
+            files.push(fileDto);
         }
-
-
         return files;
     }
-
-     import content of file in BASE64 
-    private async readFile(path: string): Promise<string> {
-        let content = await fs.readFileSync(path, { encoding: "base64" });
-        return content;
+   
+    private static fileToBase64(file: File): Promise<string> {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = error => reject(error);
+        });
     }
-    */
-    
-
 
 
 };
