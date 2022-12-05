@@ -1,5 +1,5 @@
 import React from "react";
-import {Button , Segment, Header, Icon, Menu, Divider, Label} from "semantic-ui-react";
+import {Button , Segment, Header, Icon, Menu, Divider} from "semantic-ui-react";
 import { SubmitState } from "../../constants/Submit";
 import TreeView from "./TreeView";
 import { Zip } from "../../util/ZipHelper";
