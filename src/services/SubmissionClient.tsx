@@ -46,12 +46,17 @@ export class SubmissionClient {
         for (let i = 0; i < fileList.length; i++) {
             let file = fileList[i];
             let fileDto: FileDto;
+        
             if(file instanceof File) {
-                fileDto = { path: file.name, content: await SubmissionClient.fileToBase64(file)};
+                fileDto = { path: file.name, content: SubmissionClient.removeDataUrlPrefix(await SubmissionClient.fileToBase64(file))};
             } else {
-                fileDto = { path: file.name, content: await file.async("base64") };
+                fileDto = { path: file.name, content: SubmissionClient.removeDataUrlPrefix(await file.async("base64")) };
+            }
+            if(fileDto.content === undefined) {
+                fileDto.content = "";
             }
             files.push(fileDto);
+
         }
         return files;
     }
@@ -63,6 +68,10 @@ export class SubmissionClient {
             reader.onload = () => resolve(reader.result as string);
             reader.onerror = error => reject(error);
         });
+    }
+
+    private static removeDataUrlPrefix(url: string): string {
+        return url.split("base64,")[1];
     }
 
 
