@@ -1,5 +1,5 @@
 import React from "react";
-import {Button , Segment, Header, Icon, Menu} from "semantic-ui-react";
+import {Button , Segment, Header, Icon, Menu, Divider, Label} from "semantic-ui-react";
 import { SubmitState } from "../../constants/Submit";
 import TreeView from "./TreeView";
 import { Zip } from "../../util/ZipHelper";
@@ -17,6 +17,8 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
     private dropfilecode: React.ReactElement<any, string | React.JSXElementConstructor<any>> ;
     private filetreecode: React.ReactElement<any, string | React.JSXElementConstructor<any>> | null = null;
 
+    private fileInput: HTMLInputElement | null = null;
+
     constructor(props: React.PropsWithChildren<{}>) {
         super(props);
         this.state = {submitState: SubmitState.DROPFILE,
@@ -25,18 +27,29 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
             submitModal: null};
         this.dropfilecode = this.getDropFileCode();
         
-
-
     }
 
     private getDropFileCode(): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
         return (
         <div onDrop={this.fileChange} onDragOver={this.allowDrop}>
-            <Segment placeholder>
-                <Header icon>
-                <Icon name='file code outline' />
-                Drop a Zip File or Files
-                </Header>
+            <Segment basic textAlign='center'>
+                <Segment placeholder>
+                    <Header icon>
+                    <Icon name='file code outline' />
+                    Drop a Zip File or Files
+                    </Header>
+                </Segment>
+                <Divider horizontal>Or</Divider>
+                <Button
+                    htmlFor="folderinput"
+                    primary
+                    icon="folder open"
+                    content="Select Folder"
+                    labelPosition="right"
+                    onClick={() => {this.onTriggerInputFolder()}}
+                />
+                {/* @ts-expect-error */}
+                <input hidden id="folderinput" onChange={this.onSelectFolder} type="file" webkitdirectory="true" className="folderinput_class" ref={fileInput => this.fileInput = fileInput}></input>
             </Segment>
         </div>
         );
@@ -80,6 +93,22 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
         this.setState({submitState: SubmitState.UPLOAD});
     }
 
+    onSelectFolder = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
+        this.setState({submitState: SubmitState.FILETREE});
+        let filelist = event.target.files;
+        if(filelist !== null) {
+            this.filetreecode = this.getFileTreeCode(filelist);
+            this.setState({submitState: SubmitState.FILETREE, filelist: filelist});
+        }
+    }
+
+    onTriggerInputFolder =() => {
+        if(this.fileInput !== null) {
+
+            this.fileInput.click();
+        }
+    }
     
   
 
@@ -102,7 +131,6 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
             this.setState({submitState: SubmitState.FILETREE, filelist: filelist});
         }
            
-
     }
 
     allowDrop = (event: React.DragEvent<HTMLDivElement>) => {

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Loader} from "semantic-ui-react";
+import { Loader, Header, Segment, Icon, Button} from "semantic-ui-react";
 import { ShowVersionState } from "../../constants/ShowVersion";
 import AssignmentPortal from "../../portals/AssignmentPortal";
 import { AssignmentDto } from "stumgmtbackend";
@@ -19,8 +19,7 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
             super(props);
             this.state = {table:  
                 
-                  <Loader active inline='centered' />
-                
+               this.createFirstSegment()
               ,showModal: null
               ,showVersionState: ShowVersionState.LOADING, assignments: []};
 
@@ -64,6 +63,18 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
 
         }
 
+        private createFirstSegment(): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
+            return (
+                <Segment placeholder>
+                <Header icon>
+                  <Icon name='file alternate' />
+                  Select the Assignment you want to see the versions of.
+                </Header>
+                <Button primary onClick={() => {this.loadAssignments();}}>Select Assignment</Button>
+              </Segment>
+            );
+        }
+
         private loadAssignments() {
 
             let api = new DataService();
@@ -76,19 +87,13 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
 
 
         render(): React.ReactNode {
-            if(this.state.showVersionState === ShowVersionState.LOADING) {
-                this.loadAssignments();
-            }
-
-
             return (
                 <div className="show-version">
                   {this.state.table}
                     {this.state.showVersionState === ShowVersionState.SELECTASSIGNMENT ? <AssignmentPortal assignments={this.state.assignments}
                     onReady={this.handleAssignmentWindowClosed}/> : null } 
                     {this.state.showModal}
-                    {this.state.showVersionState !== ShowVersionState.LOADING ?
-                    <Stack stack={ShowVersionStack} selected={this.state.showVersionState} /> : null}
+                    <Stack stack={ShowVersionStack} selected={this.state.showVersionState} />
                 </div>
             );
         }

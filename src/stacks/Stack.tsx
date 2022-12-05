@@ -1,6 +1,6 @@
 import React from "react";
 import { StackInterface } from "../interface/StackInterface";
-import {Step, Icon} from "semantic-ui-react";
+import {Step, Icon, Divider} from "semantic-ui-react";
 
 
 export default class Stack extends React.Component<React.PropsWithChildren<{stack: StackInterface[], selected: string}>> {
@@ -9,7 +9,7 @@ export default class Stack extends React.Component<React.PropsWithChildren<{stac
     private createStepChain() {
         return(
 
-            <Step.Group size="mini" atached="top">
+            <Step.Group size="mini" width={this.props.stack.length} atached="top" fluid>
                 {this.createSteps()}
             </Step.Group>
 
@@ -62,6 +62,7 @@ export default class Stack extends React.Component<React.PropsWithChildren<{stac
     render() {
         return (
             <div className="sequence-step">
+                <Divider/>
                 {this.createStepChain()}
             </div>
         )
