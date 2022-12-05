@@ -21,12 +21,13 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
                 
                this.createFirstSegment()
               ,showModal: null
-              ,showVersionState: ShowVersionState.LOADING, assignments: []};
+              ,showVersionState: ShowVersionState.SELECTASSIGNMENT, assignments: []};
 
         }
 
         handleAssignmentWindowClosed = (e: AssignmentDto) => {
             if(e != null) {
+                this.setState({showModal:null});
                 this.loadVersionAndDrawTable(e);
             }
         }
@@ -81,7 +82,7 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
             let stumgmt = api.getStumgmtbackend();
             stumgmt.getAssigments().then((assignments ) => {
                 this.setState({assignments: assignments});
-                this.setState({showVersionState: ShowVersionState.SELECTASSIGNMENT});
+                this.setState({showModal: <AssignmentPortal assignments={assignments} onReady={this.handleAssignmentWindowClosed}/>});
             });
         }
 
@@ -90,8 +91,6 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
             return (
                 <div className="show-version">
                   {this.state.table}
-                    {this.state.showVersionState === ShowVersionState.SELECTASSIGNMENT ? <AssignmentPortal assignments={this.state.assignments}
-                    onReady={this.handleAssignmentWindowClosed}/> : null } 
                     {this.state.showModal}
                     <Stack stack={ShowVersionStack} selected={this.state.showVersionState} />
                 </div>
