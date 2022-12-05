@@ -1,4 +1,4 @@
-import Api, { Configuration, SubmissionApi, FileDto, SubmissionResultDto} from "exerciseserverclientlib"
+import Api, { Configuration, SubmissionApi, FileDto} from "exerciseserverclientlib"
 import JSZip from "jszip";
 
 

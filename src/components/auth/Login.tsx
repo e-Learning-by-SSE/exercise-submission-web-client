@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, ButtonProps, Form} from "semantic-ui-react";
 import Layout from "./Layout";
 import SparkyAuthentifikation from "../../services/SparkyAuthentifikation";
@@ -15,7 +15,7 @@ export default class Login extends React.Component<React.PropsWithChildren<{}>> 
     let password = document.getElementsByClassName("auth-input-field")[1].getElementsByTagName("input")[0].value;
 
     let auth = new SparkyAuthentifikation();
-    let response = auth.authenticate(username, password).then((response) => {
+    auth.authenticate(username, password).then((response) => {
       if(response.status) {
         if(response.data) {
           if(response.data.token) {

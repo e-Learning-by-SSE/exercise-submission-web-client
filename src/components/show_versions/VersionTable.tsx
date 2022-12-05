@@ -60,8 +60,8 @@ export default class VersionTable extends React.Component<React.PropsWithChildre
             <Table.Row key={version.timestamp}>
                 <Table.Cell><Label size="large">{this.getTimeFromeTimestamp(version.timestamp)}</Label></Table.Cell>
                 <Table.Cell><Label size="large">{version.author}</Label></Table.Cell>
-                <Table.Cell><Button floated="left" loading={this.state.selectedButtonLoading.loading == true ?
-                         this.state.selectedButtonLoading.versionTimestamp == version.timestamp ? true : false : false } 
+                <Table.Cell><Button floated="left" loading={this.state.selectedButtonLoading.loading === true ?
+                         this.state.selectedButtonLoading.versionTimestamp === version.timestamp ? true : false : false } 
                          onClick={this.buttonPressed} id={version.timestamp}>Download</Button></Table.Cell>
             </Table.Row>
             );

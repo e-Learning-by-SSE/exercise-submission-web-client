@@ -1,5 +1,5 @@
 import * as Stumgmt from "stumgmtbackend";
-import { AssignmentApi, AssignmentDto, AssignmentRegistrationApi, AuthenticationApi, CourseApi } from "stumgmtbackend";
+import { AssignmentApi, AssignmentRegistrationApi, AuthenticationApi } from "stumgmtbackend";
 
 
 export default class Stumgmtbackend {

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Loader, Header, Segment, Icon, Button} from "semantic-ui-react";
+import { Header, Segment, Icon, Button} from "semantic-ui-react";
 import { ShowVersionState } from "../../constants/ShowVersion";
 import AssignmentPortal from "../../portals/AssignmentPortal";
 import { AssignmentDto } from "stumgmtbackend";

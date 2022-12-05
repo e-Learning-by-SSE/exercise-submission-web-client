@@ -1,9 +1,6 @@
-import React from "react";
-import SparkyAuthentifikation from "./SparkyAuthentifikation";
 import Stumgmtbackend from "./Stumgmtbackend";
 import { AssignmentDto, UserDto } from "stumgmtbackend";
 import { SubmissionClient } from "./SubmissionClient";
-import { ErrorInterface } from "../interface/ErrorInterface";
 
 
 export default class DataService {

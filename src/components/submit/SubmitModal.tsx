@@ -1,9 +1,8 @@
 import React from "react";
-import JSZip, { JSZipObject } from "jszip";
+import { JSZipObject } from "jszip";
 import { Modal, Header, Button, Icon, SemanticICONS, Dropdown, Placeholder, Grid, Label, GridColumn, PlaceholderLine, Divider} from "semantic-ui-react";
 import DataService from "../../services/DataService";
 import { AssignmentDto } from "stumgmtbackend";
-import { FileDto } from "exerciseserverclientlib";
 
 
 
