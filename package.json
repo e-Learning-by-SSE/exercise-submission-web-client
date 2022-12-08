@@ -51,6 +51,8 @@
     "@craco/craco": "^7.0.0",
     "@semantic-ui-react/craco-less": "^2.0.2",
     "@types/file-saver": "^2.0.5",
+    "@types/react-test-renderer": "^18.0.0",
+    "react-test-renderer": "^18.2.0",
     "semantic-ui-less": "^2.5.0"
   }
 }
