@@ -10,12 +10,13 @@ import Account from "../account/Account";
 
 
 
-export default class Header extends Component<React.PropsWithChildren<{onChangeVisbility: () => void, onChangeDarkMode: (darkmode: boolean) => void}>, {rightSide: any, darkmode: boolean, message: any}> {
+export default class Header extends Component<React.PropsWithChildren<{onChangeVisbility: () => void, 
+    onChangeDarkMode: (darkmode: boolean) => void, darkmode: boolean}>, {rightSide: any, darkmode: boolean, message: any}> {
     
-    constructor(props: React.PropsWithChildren<{onChangeVisbility: () => void, onChangeDarkMode: (darkmode: boolean) => void}>) {
+    constructor(props: React.PropsWithChildren<{onChangeVisbility: () => void, onChangeDarkMode: (darkmode: boolean) => void, darkmode: boolean}>) {
         super(props);
         this.state = {rightSide: this.getLoginButton(true),
-            darkmode: false
+            darkmode: this.props.darkmode
             , message: null};
         this.checkIfLoggedIn();
     }

@@ -11,7 +11,11 @@ import ShowVersion from './components/show_versions/ShowVersion';
 class App extends React.Component<React.PropsWithChildren<{}>, {darkmode: boolean}> {
   constructor(props: React.PropsWithChildren<{}>) {
     super(props);
-    this.state = {darkmode: false};
+    this.state = {darkmode: this.checkSystemDarkmode()};
+  }
+
+  private checkSystemDarkmode(): boolean {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
   onChangeDarkMode = (darkmode: boolean) => {
@@ -25,9 +29,9 @@ class App extends React.Component<React.PropsWithChildren<{}>, {darkmode: boolea
       <Route  path="/login" element={<Login/>} />
       <Route  path="/signup" element={<Signup/>} />
       <Route  path="/done" element={<Done/>} />
-      <Route  path="/dashboard" element={<Dashboard onChangeDarkMode={this.onChangeDarkMode} menuSelected={<Submit/>} />} />
-      <Route  path="/submit" element={<Dashboard onChangeDarkMode={this.onChangeDarkMode} menuSelected={<Submit/>} />} />
-      <Route  path="/version" element={<Dashboard onChangeDarkMode={this.onChangeDarkMode} menuSelected={<ShowVersion/>}  />} />
+      <Route  path="/dashboard" element={<Dashboard darkmode={this.state.darkmode} onChangeDarkMode={this.onChangeDarkMode} menuSelected={<Submit/>} />} />
+      <Route  path="/submit" element={<Dashboard darkmode={this.state.darkmode} onChangeDarkMode={this.onChangeDarkMode} menuSelected={<Submit/>} />} />
+      <Route  path="/version" element={<Dashboard darkmode={this.state.darkmode} onChangeDarkMode={this.onChangeDarkMode} menuSelected={<ShowVersion/>}  />} />
     </Routes>
   </Router>
   );
@@ -35,3 +39,5 @@ class App extends React.Component<React.PropsWithChildren<{}>, {darkmode: boolea
 }
 
 export default App;
+
+
