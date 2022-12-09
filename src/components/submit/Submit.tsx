@@ -149,12 +149,13 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
     render() {
         return (
             <div className="submit">
+                <Stack stack={SubmitStack} selected={this.state.submitState} />
                 {this.state.submitState=== SubmitState.DROPFILE ? this.dropfilecode :
                  this.state.submitState=== SubmitState.FILETREE ? this.filetreecode : 
                  this.state.submitState=== SubmitState.UPLOAD ? <SubmitModal onClosed= {this.onFinishedUploading} files={this.state.filelist}/> : null}
                 {this.state.sModal}
                 {this.state.error ? <ErrorPortal error={this.state.error} onReady={() =>{this.setState({submitState: SubmitState.DROPFILE})}}/>: null}
-            <Stack stack={SubmitStack} selected={this.state.submitState} />
+                <Divider/>
             </div>
         );
     }

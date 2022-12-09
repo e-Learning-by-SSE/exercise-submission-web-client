@@ -73,7 +73,7 @@ export default class Header extends Component<React.PropsWithChildren<{onChangeV
 
     render() {
         return (
-        <Menu secondary >
+        <Menu secondary inverted={this.props.darkmode}>
             <Menu.Item>
                 <Button icon onClick={this.handleItemClick}>
                     <Icon inverted={this.state.darkmode} name='bars' />

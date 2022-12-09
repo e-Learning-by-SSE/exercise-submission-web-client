@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Header, Segment, Icon, Button} from "semantic-ui-react";
+import { Header, Segment, Icon, Button, Divider} from "semantic-ui-react";
 import { ShowVersionState } from "../../constants/ShowVersion";
 import AssignmentPortal from "../../portals/AssignmentPortal";
 import { AssignmentDto } from "stumgmtbackend";
@@ -90,9 +90,10 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
         render(): React.ReactNode {
             return (
                 <div className="show-version">
-                  {this.state.table}
-                    {this.state.showModal}
                     <Stack stack={ShowVersionStack} selected={this.state.showVersionState} />
+                    {this.state.table}
+                    {this.state.showModal}
+                    <Divider />
                 </div>
             );
         }

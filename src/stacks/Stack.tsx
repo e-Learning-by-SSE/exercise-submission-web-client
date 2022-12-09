@@ -40,11 +40,9 @@ export default class Stack extends React.Component<React.PropsWithChildren<{stac
                     }
                 
                     steps.push(  
-                    <Step active={active} completed={completed} key={i}>
-                        <Icon name={step.icon} />
+                    <Step active={active} completed={completed} key={i}>       
                     <Step.Content>
-                        <Step.Title>{step.step}</Step.Title>
-                        <Step.Description>{step.description}</Step.Description>
+                        <Step.Title>{step.step}</Step.Title>       
                     </Step.Content>
                 </Step>)
              }
@@ -56,14 +54,19 @@ export default class Stack extends React.Component<React.PropsWithChildren<{stac
         return steps;
 
     }
-
+/* <Step active={active} completed={completed} key={i}>
+                        <Icon name={step.icon} />
+                    <Step.Content>
+                        <Step.Title>{step.step}</Step.Title>
+                        <Step.Description>{step.description}</Step.Description>
+                    </Step.Content>*/
 
 
     render() {
         return (
             <div className="sequence-step">
-                <Divider/>
                 {this.createStepChain()}
+                <Divider/>
             </div>
         )
     }
