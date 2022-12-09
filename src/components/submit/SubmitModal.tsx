@@ -3,17 +3,20 @@ import { JSZipObject } from "jszip";
 import { Modal, Header, Button, Icon, SemanticICONS, Dropdown, Placeholder, Grid, Label, GridColumn, PlaceholderLine, Divider} from "semantic-ui-react";
 import DataService from "../../services/DataService";
 import { AssignmentDto } from "stumgmtbackend";
+import { SubmissionResultDto } from "exerciseserverclientlib";
 
 
 
-export default class SubmitModal extends React.Component<React.PropsWithChildren<{files: JSZipObject[] | FileList | null}>,
+export default class SubmitModal extends React.Component<React.PropsWithChildren<{files: JSZipObject[] | FileList | null,
+    onClosed: (result: SubmissionResultDto) => void}>,
 {open: boolean, uploadButton: {content: string, disabled: boolean, loading: boolean, positive: boolean, icon: SemanticICONS},
  dropDown: any, infoContent: any}> {
 
   private assignments: AssignmentDto[] = [];
   private selectedAssignment: AssignmentDto | null = null;
 
-  constructor(props: React.PropsWithChildren<{files: JSZipObject[] | FileList | null}>) {   
+  constructor(props: React.PropsWithChildren<{files: JSZipObject[] | FileList | null, 
+      onClosed: (result: SubmissionResultDto) => void}>) {   
     super(props);
     if(this.props.files !== null) {
         this.state = {open: true, 
@@ -37,8 +40,8 @@ export default class SubmitModal extends React.Component<React.PropsWithChildren
       let files = this.props.files;
       api.getGroupName(assignment).then((groupName) => {
       client.submitAssignment(assignment.name,groupName ,files).then((response) => {
-          console.log(response); //  display fehlermeldungen
           this.setState({open: false});
+          this.props.onClosed(response);
       }).catch((error) => {
         console.log(error);
       });  

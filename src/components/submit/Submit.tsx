@@ -8,11 +8,13 @@ import Stack from "../../stacks/Stack";
 import { SubmitStack } from "../../stacks/SubmitStack";
 import ErrorPortal from "../../portals/ErrorPortal";
 import SubmitModal from "./SubmitModal";
+import SubmissionResultModal from "./submissionResult/SubmissionResultModal";
+import { SubmissionResultDto } from "exerciseserverclientlib";
 
 
 
 export default class Submit extends React.Component<React.PropsWithChildren<{}>, {submitState: string, error: {header: string, description:string} | null,
- filelist: JSZip.JSZipObject[] | FileList | null,submitModal: any}> {
+ filelist: JSZip.JSZipObject[] | FileList | null,sModal: any}> {
 
     private dropfilecode: React.ReactElement<any, string | React.JSXElementConstructor<any>> ;
     private filetreecode: React.ReactElement<any, string | React.JSXElementConstructor<any>> | null = null;
@@ -24,7 +26,7 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
         this.state = {submitState: SubmitState.DROPFILE,
             error: null,
             filelist: null,
-            submitModal: null};
+            sModal: null};
         this.dropfilecode = this.getDropFileCode();
         
     }
@@ -88,6 +90,11 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
         
     }
 
+    onFinishedUploading=(result: SubmissionResultDto) => {
+        this.setState({submitState: SubmitState.RESULT});
+        this.setState({sModal: <SubmissionResultModal result={result} onClosed={() => {this.setState({sModal: null})}}/>});
+    }
+
     onUpload = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         event.preventDefault();
         this.setState({submitState: SubmitState.UPLOAD});
@@ -144,8 +151,8 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
             <div className="submit">
                 {this.state.submitState=== SubmitState.DROPFILE ? this.dropfilecode :
                  this.state.submitState=== SubmitState.FILETREE ? this.filetreecode : 
-                 this.state.submitState=== SubmitState.UPLOAD ? <SubmitModal files={this.state.filelist}/> : null}
-
+                 this.state.submitState=== SubmitState.UPLOAD ? <SubmitModal onClosed= {this.onFinishedUploading} files={this.state.filelist}/> : null}
+                {this.state.sModal}
                 {this.state.error ? <ErrorPortal error={this.state.error} onReady={() =>{this.setState({submitState: SubmitState.DROPFILE})}}/>: null}
             <Stack stack={SubmitStack} selected={this.state.submitState} />
             </div>

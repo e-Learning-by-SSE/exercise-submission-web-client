@@ -2,6 +2,14 @@ import { StackInterface } from "../interface/StackInterface";
 export const SubmitStack: StackInterface[] = [
 
     {
+        step: "Result",
+        description: "Review Submission Result",
+        id: "Result",
+        icon: "comment",
+        order: 5
+    
+    },
+    {
         step: "Upload",
         description: "Upload Assignment",
         id: "Upload",
