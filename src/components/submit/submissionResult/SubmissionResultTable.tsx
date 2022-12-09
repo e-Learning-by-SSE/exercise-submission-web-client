@@ -10,25 +10,23 @@ export default class SubmissionResultTable extends React.Component<React.PropsWi
 
     private createTypeCell(type: CheckMessageDtoTypeEnum): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
         let tagColor: SemanticCOLORS = "red";
-        if(type === CheckMessageDtoTypeEnum.ERROR) {
-
-        } else if(type === CheckMessageDtoTypeEnum.WARNING) {
+         if(type === CheckMessageDtoTypeEnum.WARNING) {
             tagColor = "yellow";
         }
-
         return(
-            <Table.Cell>
+            
                 <Label tag color={tagColor}>{type}</Label>
-            </Table.Cell>
+        
         );
     }
+
 
     private createTableBody(): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
         const tableRows = [];
         for (let i = 0; i < this.props.result.messages.length; i++) {
             const checkResult = this.props.result.messages[i];
             tableRows.push(
-                <Table.Row key={i}>
+                <Table.Row key={i} >
                     <Table.Cell>
                         <Label>{checkResult.checkName}</Label>
                     </Table.Cell>
@@ -36,16 +34,16 @@ export default class SubmissionResultTable extends React.Component<React.PropsWi
                         <Label>{checkResult.message}</Label>
                     </Table.Cell>
                     <Table.Cell>
-                        <Label>{checkResult.file}</Label>
+                       {checkResult.file === undefined ? null: <Label>{checkResult.file}</Label>}
                     </Table.Cell>
                     <Table.Cell>
-                        <Label>{checkResult.column}</Label>
+                        {checkResult.column=== undefined ? null: <Label>{checkResult.column}</Label>}
                     </Table.Cell>
                     <Table.Cell>
-                        <Label>{checkResult.line}</Label>
+                        {checkResult.line=== undefined ? null: <Label>{checkResult.line}</Label>}
                     </Table.Cell>
                     <Table.Cell>
-                        <Label>{this.createTypeCell(checkResult.type)}</Label>
+                        {this.createTypeCell(checkResult.type)}
                     </Table.Cell>
                 </Table.Row>
             );

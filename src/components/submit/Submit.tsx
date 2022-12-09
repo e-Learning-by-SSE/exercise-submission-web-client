@@ -92,7 +92,7 @@ export default class Submit extends React.Component<React.PropsWithChildren<{}>,
 
     onFinishedUploading=(result: SubmissionResultDto) => {
         this.setState({submitState: SubmitState.RESULT});
-        this.setState({sModal: <SubmissionResultModal result={result} onClosed={() => {this.setState({sModal: null})}}/>});
+        this.setState({sModal: <SubmissionResultModal result={result} onClosed={() => {this.setState({sModal: null, submitState: SubmitState.DROPFILE})}}/>});
     }
 
     onUpload = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

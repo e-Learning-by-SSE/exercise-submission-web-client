@@ -29,7 +29,7 @@ export default class SubmissionResultModal extends React.Component<React.PropsWi
                             {this.createModal()}
                         </Modal.Content>
                         <Modal.Actions>
-                            <Button color="red" onClick={() => this.setState({open: false})}>
+                            <Button color="red" onClick={() => {this.setState({open: false}); this.props.onClosed()}}>
                                 <Button.Content><Icon name="remove"/>Close</Button.Content>
                             </Button>
                         </Modal.Actions>
