@@ -1,12 +1,16 @@
 pipeline {
     agent {
-        label 'project_digitalcampus && nodejs'
+        docker {
+            image 'node:19-bullseye'
+            label 'project_digitalcampus'
+            args '-u root:root'
+        }
     }
 
     stages {
         stage('Build') {
             steps {
-                sh 'npm install'
+                sh 'npm ci --force'
                 sh 'npm run build'
             }
         }
