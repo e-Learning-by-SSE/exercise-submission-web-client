@@ -1,6 +1,6 @@
 import React from "react";
 import { SubmissionResultDto } from "exerciseserverclientlib"; 
-import {Modal, Button, Table, Label,Icon, Header} from "semantic-ui-react";
+import {Modal, Button,Icon, Header, Segment} from "semantic-ui-react";
 import SubmissionResultTable from "./SubmissionResultTable";
 
 
@@ -15,7 +15,10 @@ export default class SubmissionResultModal extends React.Component<React.PropsWi
 
         private createModal(): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
             return(
-                    <SubmissionResultTable result={this.props.result}/>
+                    <><Header size ="large">Result:</Header><Segment color={this.props.result.accepted ? "green" : "red"}>
+                    {this.props.result.accepted ? <Header textAlign="center" color="green">Accepted</Header> :
+                        <Header textAlign="center" color="red">Rejected</Header>}
+                </Segment><SubmissionResultTable result={this.props.result} /></>
 
             );
         }
