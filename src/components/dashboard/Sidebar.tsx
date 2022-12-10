@@ -37,9 +37,15 @@ export default class SidebarComponent extends Component<React.PropsWithChildren<
                 <Icon name='file alternate' />
                 Version-History
               </Menu.Item>
-              <Menu.Item as='a'>
-                <Icon name='camera' />
-                Download
+              <Menu.Item as={Link} to="/settings" name='settings'>
+                <Icon name='settings' />
+                Settings
+              </Menu.Item>
+              <Menu.Item as='a' href="https://www.uni-hildesheim.de/datenschutz/"  name='datenschutz'>
+                Datenschutz
+              </Menu.Item>
+              <Menu.Item as='a' href="https://www.uni-hildesheim.de/impressum/" name='impressum'>
+                Impressum
               </Menu.Item>
             </Sidebar>
   
