@@ -1,9 +1,6 @@
 pipeline {
     agent {
-        docker {
-            image 'node:18.12.1-alpine'
-            label 'project_digitalcampus'
-         }
+        label 'project_digitalcampus && nodejs'
     }
 
     stages {
