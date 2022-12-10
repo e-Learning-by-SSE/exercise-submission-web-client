@@ -1,12 +1,10 @@
 import { CheckMessageDtoTypeEnum, SubmissionResultDto } from "exerciseserverclientlib";
 import React from "react";
-import { Table, Button, ButtonProps,Header, Icon, Label, SemanticCOLORS} from "semantic-ui-react";
+import { Table,Header, Label, SemanticCOLORS} from "semantic-ui-react";
 
 
 export default class SubmissionResultTable extends React.Component<React.PropsWithChildren<{result: SubmissionResultDto }>> {
-    constructor(props: React.PropsWithChildren<{result: SubmissionResultDto }>) {
-        super(props);
-    }
+    
 
     private createTypeCell(type: CheckMessageDtoTypeEnum): React.ReactElement<any, string | React.JSXElementConstructor<any>> {
         let tagColor: SemanticCOLORS = "red";

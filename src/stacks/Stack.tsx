@@ -1,6 +1,6 @@
 import React from "react";
 import { StackInterface } from "../interface/StackInterface";
-import {Step, Icon, Divider} from "semantic-ui-react";
+import {Step, Divider} from "semantic-ui-react";
 
 
 export default class Stack extends React.Component<React.PropsWithChildren<{stack: StackInterface[], selected: string}>> {
