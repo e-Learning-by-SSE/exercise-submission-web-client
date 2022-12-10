@@ -16,7 +16,6 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'npm install --no-save --exact jest-watch-typeahead@0.6.5'
                 sh 'npm test'
             }
         }
