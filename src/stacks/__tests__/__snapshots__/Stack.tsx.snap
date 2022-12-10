@@ -5,9 +5,6 @@ exports[`render Stack 1`] = `
   className="sequence-step"
 >
   <div
-    className="ui divider"
-  />
-  <div
     atached="top"
     className="ui mini fluid steps"
     width={2}
@@ -16,11 +13,6 @@ exports[`render Stack 1`] = `
       className="completed step"
       onClick={[Function]}
     >
-      <i
-        aria-hidden="true"
-        className="window maximize icon"
-        onClick={[Function]}
-      />
       <div
         className="content"
       >
@@ -29,22 +21,12 @@ exports[`render Stack 1`] = `
         >
           Select Assignment
         </div>
-        <div
-          className="description"
-        >
-          Select assignment for Upload
-        </div>
       </div>
     </div>
     <div
       className="active step"
       onClick={[Function]}
     >
-      <i
-        aria-hidden="true"
-        className="table icon"
-        onClick={[Function]}
-      />
       <div
         className="content"
       >
@@ -53,13 +35,11 @@ exports[`render Stack 1`] = `
         >
            View Versions
         </div>
-        <div
-          className="description"
-        >
-          View | Download Versions
-        </div>
       </div>
     </div>
   </div>
+  <div
+    className="ui divider"
+  />
 </div>
 `;

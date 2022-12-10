@@ -1,0 +1,115 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render Account 1`] = `
+<div
+  className="accountDropdown"
+>
+  <div
+    aria-expanded={false}
+    className="ui dropdown"
+    onBlur={[Function]}
+    onChange={[Function]}
+    onClick={[Function]}
+    onFocus={[Function]}
+    onKeyDown={[Function]}
+    onMouseDown={[Function]}
+    role="listbox"
+    tabIndex={0}
+  >
+    <span>
+      <i
+        aria-hidden="true"
+        className="user icon"
+        onClick={[Function]}
+      />
+       Hello, 
+      test
+    </span>
+    <i
+      aria-hidden="true"
+      className="dropdown icon"
+      onClick={[Function]}
+    />
+    <div
+      className="menu transition"
+    >
+      <div
+        aria-checked={false}
+        aria-disabled={true}
+        aria-selected={false}
+        className="disabled item"
+        onClick={[Function]}
+        role="option"
+        style={
+          Object {
+            "pointerEvents": "all",
+          }
+        }
+      >
+        <span
+          className="text"
+        >
+          Signed in as 
+          <strong>
+            test
+          </strong>
+        </span>
+      </div>
+      <div
+        aria-checked={false}
+        aria-selected={true}
+        className="selected item"
+        onClick={[Function]}
+        role="option"
+        style={
+          Object {
+            "pointerEvents": "all",
+          }
+        }
+      >
+        <span
+          className="text"
+        >
+          Help
+        </span>
+      </div>
+      <div
+        aria-checked={false}
+        aria-selected={false}
+        className="item"
+        onClick={[Function]}
+        role="option"
+        style={
+          Object {
+            "pointerEvents": "all",
+          }
+        }
+      >
+        <span
+          className="text"
+        >
+          Settings
+        </span>
+      </div>
+      <div
+        aria-checked={false}
+        aria-selected={false}
+        className="item"
+        onClick={[Function]}
+        role="option"
+        style={
+          Object {
+            "pointerEvents": "all",
+          }
+        }
+      >
+        <span
+          className="text"
+        >
+          Sign Out
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;
