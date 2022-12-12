@@ -25,7 +25,7 @@ class App extends React.Component<React.PropsWithChildren<{}>, {darkmode: boolea
   render() {return (
   <Router>
     <Routes>
-      <Route  path="/" element={<Login/>} />
+      <Route  path="/" element={<Dashboard darkmode={this.state.darkmode} onChangeDarkMode={this.onChangeDarkMode} menuSelected={<Submit/>} />} />
       <Route  path="/login" element={<Login/>} />
       <Route  path="/signup" element={<Signup/>} />
       <Route  path="/done" element={<Done/>} />
