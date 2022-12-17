@@ -1,5 +1,5 @@
 import React from "react";
-import { Header, Modal, Grid, Placeholder, Button, Icon } from "semantic-ui-react";
+import { Header, Modal, Grid, Placeholder, Button, Icon, GridColumn, Divider } from "semantic-ui-react";
 import DataService from "../../services/DataService";
 
 export default class Help extends React.Component<React.PropsWithChildren<{ onClosed: () => void}>, {open: boolean, informationContent: any}> {
@@ -9,47 +9,66 @@ export default class Help extends React.Component<React.PropsWithChildren<{ onCl
     }
 
     private createInformationPlaceholder():  React.ReactElement<any, string | React.JSXElementConstructor<any>> {
-        
-        return (<><Grid.Row>
-                <Placeholder>
-                    <Placeholder.Header>
-                        <Placeholder.Line />
-                    </Placeholder.Header>
-                </Placeholder>
-            </Grid.Row><Grid.Row>
-                <Placeholder>
-                    <Placeholder.Header>
-                        <Placeholder.Line />
-                    </Placeholder.Header>
-                </Placeholder>
-            </Grid.Row><Grid.Row>
-                <Placeholder>
-                    <Placeholder.Header>
-                        <Placeholder.Line />
-                    </Placeholder.Header>
-                </Placeholder>
-            </Grid.Row><Grid.Row>
-                <Placeholder>
-                    <Placeholder.Header>
-                        <Placeholder.Line />
-                    </Placeholder.Header>
-                </Placeholder>
-            </Grid.Row></>);
+
+        const placeholder = [];
+        for (let i = 0; i < 4; i++) {
+            placeholder.push(<Grid.Row>
+                <GridColumn>
+                    <Placeholder>
+                        <Placeholder.Header>
+                            <Placeholder.Line />
+                        </Placeholder.Header>
+                    </Placeholder>
+                </GridColumn>
+                <GridColumn>
+                    <Placeholder>
+                        <Placeholder.Header>
+                            <Placeholder.Line />
+                        </Placeholder.Header>
+                    </Placeholder>
+                </GridColumn>
+            </Grid.Row>);
+        }
+        return (<>{placeholder}</>);
     }
 
 
     private createInformationContent() {
         let api = new DataService();
         api.getCurrentUserDto().then((user) => {
-                this.setState({informationContent: <><Grid.Row>
-                    <Header size="small">{user.username}</Header>
-                </Grid.Row><Grid.Row>
+                this.setState({informationContent: <>
+                 <Grid.Row>
+                    <GridColumn>
+                        <Header size="medium">Username:</Header>
+                    </GridColumn>
+                    <GridColumn>
+                        <Header size="small">{user.username}</Header>
+                    </GridColumn>
+                </Grid.Row>
+                <Grid.Row>
+                    <GridColumn>
+                        <Header size="medium">Role:</Header>
+                    </GridColumn>
+                    <GridColumn>
                         <Header size="small">{user.role}</Header>
-                    </Grid.Row><Grid.Row>
+                    </GridColumn>
+                </Grid.Row>
+                <Grid.Row>
+                    <GridColumn>
+                         <Header size="medium">Group:</Header>
+                    </GridColumn>
+                    <GridColumn>
                         <Header size="small">{user.role}</Header>
-                    </Grid.Row><Grid.Row>
+                    </GridColumn>
+                </Grid.Row>
+                <Grid.Row>
+                    <GridColumn>
+                        <Header size="medium">Connected:</Header>
+                    </GridColumn>
+                    <GridColumn>
                         <Header size="small">True</Header>
-                    </Grid.Row></>}); 
+                    </GridColumn>
+                </Grid.Row></>}); 
         });
 
     }
@@ -59,28 +78,15 @@ export default class Help extends React.Component<React.PropsWithChildren<{ onCl
 
         return (
             <Modal open= {this.state.open}>
-                <Modal.Header>Help-Menu</Modal.Header>
+                <Modal.Header size="large">Help-Menu</Modal.Header>
                 <Modal.Content>
                     <Modal.Description>
-                        <Header>User-Informations</Header>
+                        <Header size="large">User-Informations</Header>
+                        <Divider/>
                         <Grid columns={2} divided>
-                            <Grid.Column>
-                                <Grid.Row>
-                                    <Header size="medium">Username:</Header>
-                                </Grid.Row>
-                                <Grid.Row>
-                                    <Header size="medium">Role:</Header>
-                                </Grid.Row>
-                                <Grid.Row>
-                                    <Header size="medium">Group:</Header>
-                                </Grid.Row>
-                                <Grid.Row>
-                                    <Header size="medium">Connected:</Header>
-                                </Grid.Row>
-                            </Grid.Column>
-                            <Grid.Column>
+                            
                              {this.state.informationContent}
-                            </Grid.Column>
+                            
                         </Grid>
                     </Modal.Description>
                 </Modal.Content>
@@ -108,3 +114,4 @@ export default class Help extends React.Component<React.PropsWithChildren<{ onCl
    
         }
     }
+
