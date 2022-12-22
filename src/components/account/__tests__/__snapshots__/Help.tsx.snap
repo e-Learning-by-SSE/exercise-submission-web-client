@@ -30,18 +30,21 @@ Object {
             class="description"
           >
             <div
-              class="ui header"
+              class="ui large header"
             >
               User-Informations
             </div>
             <div
+              class="ui divider"
+            />
+            <div
               class="ui divided two column grid"
             >
               <div
-                class="column"
+                class="row"
               >
                 <div
-                  class="row"
+                  class="column"
                 >
                   <div
                     class="ui medium header"
@@ -50,7 +53,20 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="row"
+                  class="column"
+                >
+                  <div
+                    class="ui small header"
+                  >
+                    test
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row"
+              >
+                <div
+                  class="column"
                 >
                   <div
                     class="ui medium header"
@@ -59,7 +75,20 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="row"
+                  class="column"
+                >
+                  <div
+                    class="ui small header"
+                  >
+                    USER
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row"
+              >
+                <div
+                  class="column"
                 >
                   <div
                     class="ui medium header"
@@ -68,7 +97,20 @@ Object {
                   </div>
                 </div>
                 <div
-                  class="row"
+                  class="column"
+                >
+                  <div
+                    class="ui small header"
+                  >
+                    USER
+                  </div>
+                </div>
+              </div>
+              <div
+                class="row"
+              >
+                <div
+                  class="column"
                 >
                   <div
                     class="ui medium header"
@@ -76,39 +118,8 @@ Object {
                     Connected:
                   </div>
                 </div>
-              </div>
-              <div
-                class="column"
-              >
                 <div
-                  class="row"
-                >
-                  <div
-                    class="ui small header"
-                  >
-                    test
-                  </div>
-                </div>
-                <div
-                  class="row"
-                >
-                  <div
-                    class="ui small header"
-                  >
-                    USER
-                  </div>
-                </div>
-                <div
-                  class="row"
-                >
-                  <div
-                    class="ui small header"
-                  >
-                    USER
-                  </div>
-                </div>
-                <div
-                  class="row"
+                  class="column"
                 >
                   <div
                     class="ui small header"
