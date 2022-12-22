@@ -1,15 +1,19 @@
 import Stumgmtbackend from "./Stumgmtbackend";
 import { AssignmentDto, UserDto } from "stumgmtbackend";
 import { SubmissionClient } from "./SubmissionClient";
+import { User } from "oidc-client-ts";
 
 
 export default class DataService {
 
-    private accesstoken:string | null;
+    private oicdUser: User | null = null;
     private user: UserDto | null = null;
 
     constructor() {
-        this.accesstoken = localStorage.getItem("token");
+        let userAsString = localStorage.getItem("oidc.user:" + process.env.REACT_APP_AUTHORITY + ":" + process.env.REACT_APP_CLIENTID);
+        if(userAsString != null) {
+            this.oicdUser = User.fromStorageString(userAsString);
+        }
         if(this.checkToken()) {
             this.getCurrentUser().then((user) => {
                 this.user = user;
@@ -19,24 +23,25 @@ export default class DataService {
     }
 
     private checkToken(): boolean {
-        if (this.accesstoken != null) {
-            
+        let valid = false;
+        if (this.oicdUser != null && this.oicdUser.access_token != null && this.oicdUser.access_token.length > 0) {
+            valid = true;
         }
-        return true;
+        return valid;
     }
 
     public getStumgmtbackend(): Stumgmtbackend {
-        if (this.accesstoken == null) {
+        if (this.oicdUser == null || this.oicdUser.access_token == null) {
             throw new Error("No access token");
         }
-        return new Stumgmtbackend(this.accesstoken);
+        return new Stumgmtbackend(this.oicdUser.access_token);
     }
 
     public getSubmissisonClient(): SubmissionClient {
-        if (this.accesstoken == null) {
+        if (this.oicdUser == null || this.oicdUser.access_token == null) {
             throw new Error("No access token");
         }
-        return new SubmissionClient(this.accesstoken);
+        return new SubmissionClient(this.oicdUser.access_token);
     }
 
     private async getCurrentUser(): Promise<UserDto> {

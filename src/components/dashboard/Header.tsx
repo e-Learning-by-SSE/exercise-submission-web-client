@@ -2,9 +2,9 @@
 
 import React, { Component } from "react";
 import { Menu, Icon, Button, Checkbox, Label, Message } from "semantic-ui-react";
-import { Link } from "react-router-dom";
 import DataService from "../../services/DataService";
 import Account from "../account/Account";
+import OICDClient from "../../services/OicdClient";
 
 /* React mouse event onclick */
 
@@ -40,6 +40,14 @@ export default class Header extends Component<React.PropsWithChildren<{onChangeV
 
     }
 
+    onLoginButtonClicked= (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        event.preventDefault();
+        let client = new OICDClient();
+        client.login().then((value) => {
+            
+        });      
+    }
+
     private getLoginButton(init: boolean) {
         let localDarkmode;
         if(init) {    
@@ -48,8 +56,7 @@ export default class Header extends Component<React.PropsWithChildren<{onChangeV
             localDarkmode = this.state.darkmode;
         }
         
-        
-        return <Button as={Link} to="/login" inverted={localDarkmode}>Login</Button>;
+        return <Button onClick={this.onLoginButtonClicked} inverted={localDarkmode}>Login</Button>;
     }
 
     private getDarkmodeCheckbox() {
