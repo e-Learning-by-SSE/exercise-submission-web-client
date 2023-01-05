@@ -1,0 +1,431 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render Sidebar with sidebar visible 1`] = `
+<div
+  className="ui segment pushable"
+>
+  <div
+    className="ui inverted vertical labeled icon ui uncover left thin visible sidebar menu"
+  >
+    <a
+      className="item"
+      href="/submit"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="upload icon"
+        onClick={[Function]}
+      />
+      Submit
+    </a>
+    <a
+      className="item"
+      href="/version"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="file alternate icon"
+        onClick={[Function]}
+      />
+      Version-History
+    </a>
+    <a
+      className="item"
+      href="/settings"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="settings icon"
+        onClick={[Function]}
+      />
+      Settings
+    </a>
+    <a
+      className="item"
+      href="https://www.uni-hildesheim.de/datenschutz/"
+      onClick={[Function]}
+    >
+      Datenschutz
+    </a>
+    <a
+      className="item"
+      href="https://www.uni-hildesheim.de/impressum/"
+      onClick={[Function]}
+    >
+      Impressum
+    </a>
+  </div>
+  <div
+    className="pusher"
+  >
+    <div
+      className="ui basic placeholder segment"
+    >
+      <div
+        className="dashboard-state-handler"
+      >
+        <div
+          className="dashboard-content"
+        >
+          <div
+            className="submit"
+          >
+            <div
+              className="sequence-step"
+            >
+              <div
+                atached="top"
+                className="ui mini fluid steps"
+                width={5}
+              >
+                <div
+                  className="active step"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="content"
+                  >
+                    <div
+                      className="title"
+                    >
+                      Drop file
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="step"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="content"
+                  >
+                    <div
+                      className="title"
+                    >
+                      View Files
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="step"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="content"
+                  >
+                    <div
+                      className="title"
+                    >
+                      Select Assignment
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="step"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="content"
+                  >
+                    <div
+                      className="title"
+                    >
+                      Upload
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="step"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="content"
+                  >
+                    <div
+                      className="title"
+                    >
+                      Result
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="ui divider"
+              />
+            </div>
+            <div
+              onDragOver={[Function]}
+              onDrop={[Function]}
+            >
+              <div
+                className="ui basic center aligned segment"
+              >
+                <div
+                  className="ui placeholder segment"
+                >
+                  <div
+                    className="ui icon header"
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="file code outline icon"
+                      onClick={[Function]}
+                    />
+                    Drop a Zip File or Files
+                  </div>
+                </div>
+                <div
+                  className="ui horizontal divider"
+                >
+                  Or
+                </div>
+                <button
+                  className="ui icon primary right labeled button"
+                  htmlFor="folderinput"
+                  onClick={[Function]}
+                >
+                  <i
+                    aria-hidden="true"
+                    className="folder open icon"
+                    onClick={[Function]}
+                  />
+                  Select Folder
+                </button>
+                <input
+                  className="folderinput_class"
+                  hidden={true}
+                  id="folderinput"
+                  onChange={[Function]}
+                  type="file"
+                  webkitdirectory="true"
+                />
+              </div>
+            </div>
+            <div
+              className="ui divider"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`render Sidebar without sidebar visible 1`] = `
+<div
+  className="ui segment pushable"
+>
+  <div
+    className="ui inverted vertical labeled icon ui uncover left thin sidebar menu"
+  >
+    <a
+      className="item"
+      href="/submit"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="upload icon"
+        onClick={[Function]}
+      />
+      Submit
+    </a>
+    <a
+      className="item"
+      href="/version"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="file alternate icon"
+        onClick={[Function]}
+      />
+      Version-History
+    </a>
+    <a
+      className="item"
+      href="/settings"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="settings icon"
+        onClick={[Function]}
+      />
+      Settings
+    </a>
+    <a
+      className="item"
+      href="https://www.uni-hildesheim.de/datenschutz/"
+      onClick={[Function]}
+    >
+      Datenschutz
+    </a>
+    <a
+      className="item"
+      href="https://www.uni-hildesheim.de/impressum/"
+      onClick={[Function]}
+    >
+      Impressum
+    </a>
+  </div>
+  <div
+    className="pusher"
+  >
+    <div
+      className="ui basic placeholder segment"
+    >
+      <div
+        className="dashboard-state-handler"
+      >
+        <div
+          className="dashboard-content"
+        >
+          <div
+            className="submit"
+          >
+            <div
+              className="sequence-step"
+            >
+              <div
+                atached="top"
+                className="ui mini fluid steps"
+                width={5}
+              >
+                <div
+                  className="active step"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="content"
+                  >
+                    <div
+                      className="title"
+                    >
+                      Drop file
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="step"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="content"
+                  >
+                    <div
+                      className="title"
+                    >
+                      View Files
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="step"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="content"
+                  >
+                    <div
+                      className="title"
+                    >
+                      Select Assignment
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="step"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="content"
+                  >
+                    <div
+                      className="title"
+                    >
+                      Upload
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="step"
+                  onClick={[Function]}
+                >
+                  <div
+                    className="content"
+                  >
+                    <div
+                      className="title"
+                    >
+                      Result
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="ui divider"
+              />
+            </div>
+            <div
+              onDragOver={[Function]}
+              onDrop={[Function]}
+            >
+              <div
+                className="ui basic center aligned segment"
+              >
+                <div
+                  className="ui placeholder segment"
+                >
+                  <div
+                    className="ui icon header"
+                  >
+                    <i
+                      aria-hidden="true"
+                      className="file code outline icon"
+                      onClick={[Function]}
+                    />
+                    Drop a Zip File or Files
+                  </div>
+                </div>
+                <div
+                  className="ui horizontal divider"
+                >
+                  Or
+                </div>
+                <button
+                  className="ui icon primary right labeled button"
+                  htmlFor="folderinput"
+                  onClick={[Function]}
+                >
+                  <i
+                    aria-hidden="true"
+                    className="folder open icon"
+                    onClick={[Function]}
+                  />
+                  Select Folder
+                </button>
+                <input
+                  className="folderinput_class"
+                  hidden={true}
+                  id="folderinput"
+                  onChange={[Function]}
+                  type="file"
+                  webkitdirectory="true"
+                />
+              </div>
+            </div>
+            <div
+              className="ui divider"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -68,7 +68,7 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
             return (
                 <Segment placeholder>
                 <Header icon>
-                  <Icon name='file alternate' />
+                  <Icon name='file outline' />
                   Select the Assignment you want to see the versions of.
                 </Header>
                 <Button primary onClick={() => {this.loadAssignments();}}>Select Assignment</Button>
