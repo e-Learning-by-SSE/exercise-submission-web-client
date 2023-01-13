@@ -1,0 +1,249 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`render Header with darkmode 1`] = `
+<div
+  className="ui inverted secondary menu"
+>
+  <div
+    className="item"
+    onClick={[Function]}
+  >
+    <button
+      className="ui icon button"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="bars inverted icon"
+        onClick={[Function]}
+      />
+    </button>
+  </div>
+  <div
+    className="right item"
+    onClick={[Function]}
+  >
+    <div
+      className="ui checked toggle checkbox"
+      onChange={[Function]}
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
+    >
+      <input
+        checked={true}
+        className="hidden"
+        readOnly={true}
+        tabIndex={0}
+        type="checkbox"
+      />
+      <div
+        className="ui label"
+        onClick={[Function]}
+      >
+        Darkmode
+         
+        <i
+          aria-hidden="true"
+          className="moon inverted icon"
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+    <a
+      className="ui button"
+      href="/login"
+      onClick={[Function]}
+      role="button"
+    >
+      Login
+    </a>
+  </div>
+</div>
+`;
+
+exports[`render Header with login 1`] = `
+<div
+  className="ui secondary menu"
+>
+  <div
+    className="item"
+    onClick={[Function]}
+  >
+    <button
+      className="ui icon button"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="bars icon"
+        onClick={[Function]}
+      />
+    </button>
+  </div>
+  <div
+    className="right item"
+    onClick={[Function]}
+  >
+    <div
+      className="ui toggle checkbox"
+      onChange={[Function]}
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
+    >
+      <input
+        checked={false}
+        className="hidden"
+        readOnly={true}
+        tabIndex={0}
+        type="checkbox"
+      />
+      <div
+        className="ui label"
+        onClick={[Function]}
+      >
+        Normalmode
+         
+        <i
+          aria-hidden="true"
+          className="sun icon"
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+    <a
+      className="ui button"
+      href="/login"
+      onClick={[Function]}
+      role="button"
+    >
+      Login
+    </a>
+  </div>
+</div>
+`;
+
+exports[`render Header without darkmode 1`] = `
+<div
+  className="ui secondary menu"
+>
+  <div
+    className="item"
+    onClick={[Function]}
+  >
+    <button
+      className="ui icon button"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="bars icon"
+        onClick={[Function]}
+      />
+    </button>
+  </div>
+  <div
+    className="right item"
+    onClick={[Function]}
+  >
+    <div
+      className="ui toggle checkbox"
+      onChange={[Function]}
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
+    >
+      <input
+        checked={false}
+        className="hidden"
+        readOnly={true}
+        tabIndex={0}
+        type="checkbox"
+      />
+      <div
+        className="ui label"
+        onClick={[Function]}
+      >
+        Normalmode
+         
+        <i
+          aria-hidden="true"
+          className="sun icon"
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+    <a
+      className="ui button"
+      href="/login"
+      onClick={[Function]}
+      role="button"
+    >
+      Login
+    </a>
+  </div>
+</div>
+`;
+
+exports[`render Header without login 1`] = `
+<div
+  className="ui secondary menu"
+>
+  <div
+    className="item"
+    onClick={[Function]}
+  >
+    <button
+      className="ui icon button"
+      onClick={[Function]}
+    >
+      <i
+        aria-hidden="true"
+        className="bars icon"
+        onClick={[Function]}
+      />
+    </button>
+  </div>
+  <div
+    className="right item"
+    onClick={[Function]}
+  >
+    <div
+      className="ui toggle checkbox"
+      onChange={[Function]}
+      onClick={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
+    >
+      <input
+        checked={false}
+        className="hidden"
+        readOnly={true}
+        tabIndex={0}
+        type="checkbox"
+      />
+      <div
+        className="ui label"
+        onClick={[Function]}
+      >
+        Normalmode
+         
+        <i
+          aria-hidden="true"
+          className="sun icon"
+          onClick={[Function]}
+        />
+      </div>
+    </div>
+    <a
+      className="ui button"
+      href="/login"
+      onClick={[Function]}
+      role="button"
+    >
+      Login
+    </a>
+  </div>
+</div>
+`;
