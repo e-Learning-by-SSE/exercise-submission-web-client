@@ -5,6 +5,12 @@ pipeline {
         label 'docker'
     }
 
+    environment {
+        DOCKER_TARGET = 'e-learning-by-sse/exercise-submission-web-client'
+        DOCKER_REGISTRY = 'https://ghcr.io'
+        JENKINS_DOCKER_CREDS = 'github-ssejenkins'
+    }
+    
     stages {
     
         stage('Prepare NodeJS') {
@@ -47,7 +53,8 @@ pipeline {
         stage('Publish') {
             steps {
                 script {
-                    docker.withRegistry('https://ghcr.io', 'e-learning-by-sse') {
+                    docker.withRegistry("${DOCKER_REGISTRY}", "${JENKINS_DOCKER_CREDS}") {
+                        dockerImage.push("${env.BUILD_NUMBER}")
                         // TODO api version tag
                         dockerImage.push("latest")
                     }
