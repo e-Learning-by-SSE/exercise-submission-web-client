@@ -2,6 +2,7 @@ import Stumgmtbackend from "./Stumgmtbackend";
 import { AssignmentDto, UserDto } from "stumgmtbackend";
 import { SubmissionClient } from "./SubmissionClient";
 import { User } from "oidc-client-ts";
+import { env } from "../../env"
 
 
 export default class DataService {
@@ -10,7 +11,7 @@ export default class DataService {
     private user: UserDto | null = null;
 
     constructor() {
-        let userAsString = localStorage.getItem("oidc.user:" + process.env.REACT_APP_AUTHORITY + ":" + process.env.REACT_APP_CLIENTID);
+        let userAsString = localStorage.getItem("oidc.user:" + env.REACT_APP_AUTHORITY + ":" + env.REACT_APP_CLIENTID);
         if(userAsString != null) {
             this.oicdUser = User.fromStorageString(userAsString);
         }

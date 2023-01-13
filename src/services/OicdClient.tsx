@@ -1,4 +1,5 @@
 import { UserManager, User, Log } from "oidc-client-ts"
+import { env } from "../../env"
 
 
 
@@ -9,9 +10,9 @@ export default class OICDClient {
     constructor() {
         Log.setLogger(console);
         this.userManager = new UserManager({
-            authority: process.env.REACT_APP_AUTHORITY ? process.env.REACT_APP_AUTHORITY : "https://localhost:5001",
-            client_id: process.env.REACT_APP_CLIENTID ? process.env.REACT_APP_CLIENTID : "testID",
-            redirect_uri: process.env.REACT_APP_REDIRECTURI ? process.env.REACT_APP_REDIRECTURI : "http://localhost:3000/callback",
+            authority: env.REACT_APP_AUTHORITY ? env.REACT_APP_AUTHORITY : "https://localhost:5001",
+            client_id: env.REACT_APP_CLIENTID ? env.REACT_APP_CLIENTID : "testID",
+            redirect_uri: env.REACT_APP_REDIRECTURI ? env.REACT_APP_REDIRECTURI : "http://localhost:3000/callback",
         });
     }
 

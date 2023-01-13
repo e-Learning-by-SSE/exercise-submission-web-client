@@ -1,5 +1,6 @@
 import * as Stumgmt from "stumgmtbackend";
 import { AssignmentApi, AssignmentRegistrationApi, AuthenticationApi } from "stumgmtbackend";
+import { env } from "../../env"
 
 
 export default class Stumgmtbackend {
@@ -11,7 +12,7 @@ export default class Stumgmtbackend {
     constructor(access_token: string) {
 
         this.config = new Stumgmt.Configuration();
-        this.config.basePath = process.env.REACT_APP_BACKEND;
+        this.config.basePath = env.REACT_APP_BACKEND;
 
         this.config.baseOptions= {  headers: { Authorization: "Bearer " + access_token } };
 

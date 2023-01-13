@@ -37,6 +37,14 @@ Create the build with `npm run build`
 
 Build Docker with `docker build -t imageName .`
 
+You can now set environment variables that overwritte the .env settings
+Set the variables in the runtimedocker-args.template.sh
+Then run `source runtimedocker-args.template.sh` in the bash
+
+_It is also Possible to give the variables as an argument to docker
+`docker run -dp 3000:3000 imageName \
+-e REACT_APP_BACKEND="http://host.docker.internal:3001"`_
+
 Run Docker with `docker run -dp 3000:3000 imageName`
 
 ## Learn More
