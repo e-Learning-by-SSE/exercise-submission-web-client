@@ -2,7 +2,7 @@ import Stumgmtbackend from "./Stumgmtbackend";
 import { AssignmentDto, UserDto } from "stumgmtbackend";
 import { SubmissionClient } from "./SubmissionClient";
 import { User } from "oidc-client-ts";
-import { env } from "../../env"
+import { env } from "../env"
 
 
 export default class DataService {

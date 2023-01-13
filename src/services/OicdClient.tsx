@@ -1,5 +1,5 @@
 import { UserManager, User, Log } from "oidc-client-ts"
-import { env } from "../../env"
+import { env } from "../env"
 
 
 
