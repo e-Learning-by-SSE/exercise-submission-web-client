@@ -44,8 +44,8 @@ Now you can run Docker with `docker run -dp 3000:3000 imageName`
     `docker run -dp 3000:3000 --env-file pathToEnvFile imageName`
  
     _It is also Possible to give the variables as an argument to docker
-    `docker run -dp 3000:3000 imageName \
-    -e REACT_APP_BACKEND="http://host.docker.internal:3001"`_
+    `docker run -dp 3000:3000
+    -e REACT_APP_BACKEND="http://host.docker.internal:3001" imageName`_
 
 
 ## Learn More
