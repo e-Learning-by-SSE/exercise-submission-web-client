@@ -1,5 +1,6 @@
 import Api, { Configuration, SubmissionApi, FileDto} from "exerciseserverclientlib"
 import JSZip from "jszip";
+import { env } from "../../env"
 
 
 
@@ -12,14 +13,14 @@ export class SubmissionClient {
 
     constructor(accesstoken: string) {
         
-        this.config.basePath = process.env.REACT_APP_SUBMISSIONSERVER;
+        this.config.basePath = env.REACT_APP_SUBMISSIONSERVER;
 
         this.config.baseOptions = { headers: { Authorization: "Bearer " + accesstoken } };
     }
-
+    
     public async submitAssignment(assignmentId: string, groupName: string ,files: FileList | JSZip.JSZipObject[]): Promise<Api.SubmissionResultDto>{
         let api = new SubmissionApi(this.config);
-        let courseID = process.env.REACT_APP_COURSEID || "java-wise2021";
+        let courseID = env.REACT_APP_COURSEID || "java-wise2021";
         let fileDtos = await SubmissionClient.convertFileListoFileDtoList(files);
         let response = await api.submit(courseID, assignmentId, groupName, fileDtos);
         return response.data;
@@ -28,14 +29,14 @@ export class SubmissionClient {
     
     public async getVersionsOfAssignment(assignmentId: string, group: string): Promise<Api.VersionDto[]> {
         let api = new SubmissionApi(this.config);
-        let versionsResponse = await api.listVersions(process.env.REACT_APP_COURSEID || "java-wise2021", assignmentId, group);
+        let versionsResponse = await api.listVersions(env.REACT_APP_COURSEID || "java-wise2021", assignmentId, group);
         let versions = versionsResponse.data;
         return versions;
     }
 
     public async downloadSubmission(assignmentId: string, group: string, versiontimestamp: number): Promise<Api.FileDto[]> {
         let api = new SubmissionApi(this.config);
-        let fileResponse = await api.getVersion(process.env.REACT_APP_COURSEID || "java-wise2021", assignmentId, group, versiontimestamp);
+        let fileResponse = await api.getVersion(env.REACT_APP_COURSEID || "java-wise2021", assignmentId, group, versiontimestamp);
         let files = fileResponse.data;
         return files;
     }
