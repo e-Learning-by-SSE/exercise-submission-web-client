@@ -1,6 +1,7 @@
 import * as Auth from "sparkyservice";
 import { ErrorInterface } from "../interface/ErrorInterface";
 import { CredentialsDto, AuthenticationInfoDto } from "sparkyservice";
+import { env } from "../env";
 
 
 
@@ -45,7 +46,7 @@ export default class SparkyAuthentifikation {
 
     private static getConfig(): Auth.Configuration {
         let authConfig = new Auth.Configuration();
-        authConfig.basePath= process.env.REACT_APP_AUTHURL;
+        authConfig.basePath= env.REACT_APP_AUTHURL;
         return authConfig;
     }
 
