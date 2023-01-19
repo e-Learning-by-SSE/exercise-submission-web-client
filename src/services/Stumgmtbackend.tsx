@@ -1,6 +1,6 @@
 import * as Stumgmt from "stumgmtbackend";
 import { AssignmentApi, AssignmentRegistrationApi, AuthenticationApi } from "stumgmtbackend";
-import { env } from "../../env"
+import { env } from "../env"
 
 
 export default class Stumgmtbackend {

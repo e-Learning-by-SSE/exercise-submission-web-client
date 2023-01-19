@@ -1,6 +1,6 @@
 import Api, { Configuration, SubmissionApi, FileDto} from "exerciseserverclientlib"
 import JSZip from "jszip";
-import { env } from "../../env"
+import { env } from "../env"
 
 
 
