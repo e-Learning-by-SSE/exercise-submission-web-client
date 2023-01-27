@@ -5,7 +5,7 @@ import { Zip } from "../../util/ZipHelper";
 import { saveAs } from "file-saver";
 
 
-export default class Help extends React.Component<React.PropsWithChildren<{ onClosed: () => void, files: FileDto[],
+export default class DownloadSubmissionModal extends React.Component<React.PropsWithChildren<{ onClosed: () => void, files: FileDto[],
      version: VersionDto; group: string }>, {open: boolean, buttonLoading: boolean}> {
 
     constructor(props: React.PropsWithChildren<{onClosed: () => void, files: FileDto[], version: VersionDto, group: string}>) {

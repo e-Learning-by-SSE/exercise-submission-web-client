@@ -2,7 +2,6 @@ import React from "react";
 
 import { Header, Segment, Icon, Button, Divider} from "semantic-ui-react";
 import { ShowVersionState } from "../../constants/ShowVersion";
-import AssignmentPortal from "../../portals/AssignmentPortal";
 import { AssignmentDto } from "stumgmtbackend";
 import DataService from "../../services/DataService";
 import VersionTable from "./VersionTable";
@@ -10,6 +9,7 @@ import { VersionDto } from "exerciseserverclientlib";
 import { ShowVersionStack } from "../../stacks/ShowVersionStack";
 import Stack from "../../stacks/Stack";
 import DownloadSubmissionModal from "./DownloadSubmissionModal";
+import SelectAssignmentModal from "./SelectAssignmentsModal";
 
 export default class ShowVersion extends React.Component<React.PropsWithChildren<{}>, {table: any, showVersionState: string, assignments: AssignmentDto[], showModal: any }> {
     
@@ -25,9 +25,9 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
 
         }
 
-        handleAssignmentWindowClosed = (e: AssignmentDto) => {
+        handleAssignmentWindowClosed = (e: AssignmentDto | null) => {
+            this.setState({showModal: null}); //need to write error message and/or redirect
             if(e != null) {
-                this.setState({showModal:null});
                 this.loadVersionAndDrawTable(e);
             }
         }
@@ -82,7 +82,7 @@ export default class ShowVersion extends React.Component<React.PropsWithChildren
             let stumgmt = api.getStumgmtbackend();
             stumgmt.getAssigments().then((assignments ) => {
                 this.setState({assignments: assignments});
-                this.setState({showModal: <AssignmentPortal assignments={assignments} onReady={this.handleAssignmentWindowClosed}/>});
+                this.setState({showModal: <SelectAssignmentModal onClosed={this.handleAssignmentWindowClosed}/>});
             });
         }
 

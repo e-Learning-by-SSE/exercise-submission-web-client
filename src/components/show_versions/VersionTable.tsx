@@ -1,6 +1,6 @@
 import { VersionDto } from "exerciseserverclientlib";
 import React from "react";
-import { Table, Button, ButtonProps,Header, Icon, Label } from "semantic-ui-react";
+import { Table, Button, ButtonProps,Header, Icon, Label, Message } from "semantic-ui-react";
 import HeaderSubHeader from "semantic-ui-react/dist/commonjs/elements/Header/HeaderSubheader";
 
 
@@ -13,8 +13,17 @@ export default class VersionTable extends React.Component<React.PropsWithChildre
     }
 
     private createTable() {
+        let errorMesssage = null;
+        if(this.props.versions.length === 0) {
+            errorMesssage = <Message negative size="mini" floating={true} 
+            icon='warning sign'
+            header='No version uploaded'
+            content='There is no version uploaded for this exercise'
+          />
+        }
        //header
        return(
+        <div  className="version-table">
        <Table basic>
             <Table.Header>
             <Table.Row>
@@ -48,6 +57,10 @@ export default class VersionTable extends React.Component<React.PropsWithChildre
                 {this.createTableRows()}
             </Table.Body>
         </Table>
+        <div className="error-message">
+            {errorMesssage}
+            </div>
+        </div>
        );
 
     }
@@ -89,7 +102,7 @@ export default class VersionTable extends React.Component<React.PropsWithChildre
 
     render(): React.ReactNode {
         return (
-            <div className="version-table">
+            <div className="version-table-site">
                 {this.createTable()}
             </div>
         );
