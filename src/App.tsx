@@ -7,6 +7,7 @@ import Done from "./components/auth/Done";
 import Dashboard from "./components/dashboard/Dashboard";
 import Submit from './components/submit/Submit';
 import ShowVersion from './components/show_versions/ShowVersion';
+import Settings from './components/settings/Settings';
 
 class App extends React.Component<React.PropsWithChildren<{}>, {darkmode: boolean}> {
   constructor(props: React.PropsWithChildren<{}>) {
@@ -32,6 +33,7 @@ class App extends React.Component<React.PropsWithChildren<{}>, {darkmode: boolea
       <Route  path="/dashboard" element={<Dashboard darkmode={this.state.darkmode} onChangeDarkMode={this.onChangeDarkMode} menuSelected={<Submit/>} />} />
       <Route  path="/submit" element={<Dashboard darkmode={this.state.darkmode} onChangeDarkMode={this.onChangeDarkMode} menuSelected={<Submit/>} />} />
       <Route  path="/version" element={<Dashboard darkmode={this.state.darkmode} onChangeDarkMode={this.onChangeDarkMode} menuSelected={<ShowVersion/>}  />} />
+      <Route  path="/settings" element={<Dashboard darkmode={this.state.darkmode} onChangeDarkMode={this.onChangeDarkMode} menuSelected={<Settings/>}  />} />
     </Routes>
   </Router>
   );

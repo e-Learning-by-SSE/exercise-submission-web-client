@@ -1,12 +1,15 @@
 import Stumgmtbackend from "./Stumgmtbackend";
 import { AssignmentDto, UserDto } from "stumgmtbackend";
 import { SubmissionClient } from "./SubmissionClient";
+import CurrentCourse from "./courses/CurrentCourse";
 
 
 export default class DataService {
 
     private accesstoken:string | null;
     private user: UserDto | null = null;
+
+    private courseidstorage = new CurrentCourse();
 
     constructor() {
         this.accesstoken = localStorage.getItem("token");
@@ -25,18 +28,24 @@ export default class DataService {
         return true;
     }
 
+    public getCurrentCourseId(): CurrentCourse {
+        return this.courseidstorage;
+    }
+
+
+
     public getStumgmtbackend(): Stumgmtbackend {
         if (this.accesstoken == null) {
             throw new Error("No access token");
         }
-        return new Stumgmtbackend(this.accesstoken);
+        return new Stumgmtbackend(this.accesstoken, this.courseidstorage.getCourseId());
     }
 
     public getSubmissisonClient(): SubmissionClient {
         if (this.accesstoken == null) {
             throw new Error("No access token");
         }
-        return new SubmissionClient(this.accesstoken);
+        return new SubmissionClient(this.accesstoken, this.courseidstorage.getCourseId());
     }
 
     private async getCurrentUser(): Promise<UserDto> {
